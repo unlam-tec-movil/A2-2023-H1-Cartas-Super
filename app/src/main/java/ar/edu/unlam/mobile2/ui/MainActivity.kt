@@ -109,10 +109,10 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                 Text(text = "Imagen de los gatitos")
                 Button(
                     onClick = {
-                        context.startActivity(Intent(context, HeroDetailActivity::class.java))
+                        context.startActivity(Intent(context, NewGameActivity::class.java))
                     },
                 ) {
-                    Text(text = "ir pantalla heroDetail")
+                    Text(text = "ir pantalla NewGame")
                 }
             }
             Log.i("MainActivity", "second row")
