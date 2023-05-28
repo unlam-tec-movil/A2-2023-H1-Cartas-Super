@@ -6,6 +6,7 @@ import android.graphics.Paint.Align
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -45,10 +46,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.unlam.mobile2.R
+import ar.edu.unlam.mobile2.SuperheroViewModel
+import ar.edu.unlam.mobile2.domain.hero.heroImage
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
+import coil.compose.rememberImagePainter
 
 class Quiz : ComponentActivity() {
+
+    val viewModel by viewModels<SuperheroViewModel> ()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -58,6 +64,7 @@ class Quiz : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    viewModel.fetchHeroImage("100")
                     PantallaQuiz()
                     QuizItem()
                 }

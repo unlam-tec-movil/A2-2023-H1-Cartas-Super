@@ -6,8 +6,8 @@ import javax.inject.Inject
 
 class KittiesRestRepo @Inject constructor(builder: Builder) : KittiesRepo {
     var retrofit: Retrofit = builder
-        .baseUrl("https://api.thecatapi.com")
-        //.baseUrl("https://dog.ceo")
+        //.baseUrl("https://api.thecatapi.com")
+        .baseUrl("https://superheroapi.com/api/10160635333444116/")
         .build()
 
     override suspend fun getNewKitty(): String {
@@ -18,6 +18,7 @@ class KittiesRestRepo @Inject constructor(builder: Builder) : KittiesRepo {
 
         if (call.isSuccessful) {
             return kitties?.get(0)?.url ?: "no kitties avaiables"
+
         }
 
         return "error on call"
