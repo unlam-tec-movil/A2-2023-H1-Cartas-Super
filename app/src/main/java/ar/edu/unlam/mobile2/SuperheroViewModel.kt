@@ -17,13 +17,14 @@ class SuperheroViewModel : ViewModel() {
                 val response = RetrofitClient.superheroApiService.getHeroImage(id)
                 if (response.isSuccessful) {
                     _heroImage.value = response.body()?.url
+                    println("conecto")
                 } else {
-                    println()
+                    println("Entro al else")
                     // Manejar errores de solicitud aquí
                 }
             } catch (e: Exception) {
                 // Manejar errores de conexión aquí
-                println()
+                println("Entro al catch")
             }
         }
     }

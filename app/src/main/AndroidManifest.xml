@@ -16,6 +16,11 @@
         android:theme="@style/Theme.Mobile2_Scaffolding"
         tools:targetApi="31">
         <activity
+            android:name=".ui.NewGameActivity"
+            android:exported="false"
+            android:label="@string/title_activity_new_game"
+            android:theme="@style/Theme.Mobile2_Scaffolding" />
+        <activity
             android:name=".ui.CollectionActivity"
             android:exported="false"
             android:label="@string/title_activity_collection"
@@ -26,10 +31,11 @@
             android:label="@string/title_activity_hero_detail"
             android:theme="@style/Theme.Mobile2_Scaffolding" />
         <activity
-            android:name=".ui.Prueba"
+            android:name=".ui.Quiz"
             android:exported="false"
-            android:label="@string/title_activity_prueba"
+            android:label="Quiz"
             android:theme="@style/Theme.Mobile2_Scaffolding" />
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
