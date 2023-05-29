@@ -56,7 +56,7 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
@@ -67,7 +67,6 @@ dependencies {
     implementation 'androidx.compose.ui:ui-graphics'
     implementation platform('androidx.compose:compose-bom:2022.10.00')
     implementation platform('androidx.compose:compose-bom:2022.10.00')
-    implementation platform('androidx.compose:compose-bom:2022.10.00')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -76,7 +75,6 @@ dependencies {
     implementation 'com.google.dagger:hilt-android:2.45'
     androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
-    androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
     androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
     androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
     debugImplementation 'androidx.compose.ui:ui-tooling'
@@ -93,19 +91,14 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     // Jetpack Compose
-    implementation 'androidx.compose:compose-bom:2023.05.00'
-    androidTestImplementation 'androidx.compose:compose-bom:2023.05.00'
+    implementation 'androidx.compose:compose-bom:2023.04.01'
+    androidTestImplementation 'androidx.compose:compose-bom:2023.04.01'
     // Material Design 3
     implementation("androidx.compose.material3:material3:1.0.1")
     implementation "androidx.compose.ui:ui-tooling-preview:1.5.0-alpha03"
 
     // Async Images
     implementation("io.coil-kt:coil-compose:2.3.0")
-    //implementacion appcenter
-    def appCenterSdkVersion = '4.4.5'
-    implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
-    implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
-
 }
 
 // Allow references to generated code
