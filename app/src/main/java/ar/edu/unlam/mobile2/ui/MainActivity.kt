@@ -37,6 +37,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.BuildConfig
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
+import ar.edu.unlam.mobile2.ui.heroDuel.HeroDuelActivity
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
 import coil.compose.SubcomposeAsyncImage
@@ -142,6 +143,13 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                     color = Color.Black,
                     fontFamily = shaka_pow
                 )
+            }
+            Button(
+                onClick = {
+                    context.startActivity(Intent(context, HeroDuelActivity::class.java))
+                },
+            ) {
+                Text(text = "ir pantalla HeroDuel")
             }
 
         }
