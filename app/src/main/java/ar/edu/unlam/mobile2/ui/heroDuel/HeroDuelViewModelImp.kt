@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile2.data.repository.HeroRepositoryTest
 import ar.edu.unlam.mobile2.data.repository.IHeroRepository
-import ar.edu.unlam.mobile2.domain.hero.DataHero
 import ar.edu.unlam.mobile2.domain.heroDuel.HeroDuelManager
 import ar.edu.unlam.mobile2.domain.heroDuel.Multiplier
 import ar.edu.unlam.mobile2.domain.heroDuel.Stat
@@ -53,7 +52,7 @@ class HeroDuelViewModelImp (private val repo: IHeroRepository = HeroRepositoryTe
                 isLoading = true
             )
             adversaryDeckState = adversaryDeckState.copy(
-                deck = repo.getOpponentDeck(),
+                deck = repo.getAdversaryDeck(),
                 isLoading = false
             )
         }

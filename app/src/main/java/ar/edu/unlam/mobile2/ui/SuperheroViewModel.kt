@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2
+package ar.edu.unlam.mobile2.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

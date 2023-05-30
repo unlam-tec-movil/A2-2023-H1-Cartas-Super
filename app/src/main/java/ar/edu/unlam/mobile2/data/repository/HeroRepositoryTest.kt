@@ -83,11 +83,11 @@ class HeroRepositoryTest: IHeroRepository {
         return heroListTest1()
     }
 
-    override fun getOpponentDeck(difficulty: Difficulty): List<DataHero> {
+    override fun getAdversaryDeck(difficulty: Difficulty): List<DataHero> {
         return heroListTest2()
     }
 
-    override fun getOpponentDeck(): List<DataHero> {
+    override fun getAdversaryDeck(): List<DataHero> {
         return heroListTest2()
     }
 
