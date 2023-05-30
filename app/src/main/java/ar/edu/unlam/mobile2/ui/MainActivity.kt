@@ -29,6 +29,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.BuildConfig
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
+import ar.edu.unlam.mobile2.ui.heroDuel.HeroDuelActivity
 import coil.compose.SubcomposeAsyncImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -113,6 +114,13 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                     },
                 ) {
                     Text(text = "ir pantalla NewGame")
+                }
+                Button(
+                    onClick = {
+                        context.startActivity(Intent(context, HeroDuelActivity::class.java))
+                    },
+                ) {
+                    Text(text = "ir pantalla HeroDuel")
                 }
             }
             Log.i("MainActivity", "second row")

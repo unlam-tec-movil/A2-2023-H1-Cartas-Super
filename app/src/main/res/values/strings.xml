@@ -15,4 +15,5 @@
     <string name="title_activity_hero_detail">HeroDetailActivity</string>
     <string name="title_activity_collection">CollectionActivity</string>
     <string name="title_activity_new_game">NewGameActivity</string>
+    <string name="title_activity_hero_fight">HeroFightActivity</string>
 </resources>
