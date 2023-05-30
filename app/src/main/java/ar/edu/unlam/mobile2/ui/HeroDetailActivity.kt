@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -23,10 +24,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.Appearance
 import ar.edu.unlam.mobile2.domain.hero.Biography
@@ -35,12 +39,13 @@ import ar.edu.unlam.mobile2.domain.hero.DataHero
 import ar.edu.unlam.mobile2.domain.hero.Powerstats
 import ar.edu.unlam.mobile2.domain.hero.Work
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
+import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
 
 class HeroDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val myIntent: Intent = intent
-        val idString : String? = myIntent.getStringExtra("id")
+        val idString: String? = myIntent.getStringExtra("id")
         setContent {
             Mobile2_ScaffoldingTheme {
                 // A surface container using the 'background' color from the theme
@@ -50,6 +55,7 @@ class HeroDetailActivity : ComponentActivity() {
                 ) {
                     HeroDetailFondo()
                     HeroDetails(dataHero = DataHero(id = idString!!, name = "Test $idString"))
+                    //HeroDetails(dataHero = DataHero(id = "idString!!", name = "Test idString"))
                 }
             }
         }
@@ -59,7 +65,7 @@ class HeroDetailActivity : ComponentActivity() {
 @Composable
 fun HeroDetailFondo() {
     Image(
-        painter = painterResource(id = R.drawable.fondo_pantalla_pelea),
+        painter = painterResource(id = R.drawable.fondo_coleccion),
         contentDescription = "Pantalla Coleccion",
         contentScale = ContentScale.FillHeight,
         modifier = Modifier.fillMaxSize()
@@ -73,10 +79,10 @@ fun HeroDetails(
     dataHero: DataHero = DataHero(id = "9999", name = "Test 99999")
 ) {
     var isStatsVisible by rememberSaveable { mutableStateOf(true) }
-    var isBiographyVisible by rememberSaveable {mutableStateOf(true)}
-    var isAppearanceVisible by rememberSaveable {mutableStateOf(true)}
-    var isWorkVisible by rememberSaveable {mutableStateOf(true)}
-    var isConnectionsVisible by rememberSaveable {mutableStateOf(true)}
+    var isBiographyVisible by rememberSaveable { mutableStateOf(true) }
+    var isAppearanceVisible by rememberSaveable { mutableStateOf(true) }
+    var isWorkVisible by rememberSaveable { mutableStateOf(true) }
+    var isConnectionsVisible by rememberSaveable { mutableStateOf(true) }
 
     //modifier = modifier.align(Alignment.CenterHorizontally)
 
@@ -103,8 +109,15 @@ fun HeroDetails(
             modifier = modifier
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
+                .padding(16.dp),
+            colors = ButtonDefaults.buttonColors(Color.Red)
         ) {
-            Text(text = if(isStatsVisible) "Ocultar Stats" else "Mostrar Stats")
+            Text(
+                text = if (isStatsVisible) "Ocultar Stats" else "Mostrar Stats",
+                fontSize = 20.sp,
+                color = Color.White,
+                fontFamily = shaka_pow
+            )
         }
         if (isStatsVisible) {
             HeroStats(stats = dataHero.powerstats)
@@ -115,8 +128,15 @@ fun HeroDetails(
             modifier = modifier
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
+                .padding(16.dp),
+            colors = ButtonDefaults.buttonColors(Color.Red)
         ) {
-            Text(text = if (isBiographyVisible) "Ocultar biografía" else "Mostrar biografía")
+            Text(
+                text = if (isBiographyVisible) "Ocultar biografia" else "Mostrar biografia",
+                fontSize = 20.sp,
+                color = Color.White,
+                fontFamily = shaka_pow
+            )
         }
         if (isBiographyVisible) {
             HeroBiography(dataHero.biography)
@@ -127,10 +147,17 @@ fun HeroDetails(
             modifier = modifier
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
+                .padding(16.dp),
+            colors = ButtonDefaults.buttonColors(Color.Red)
         ) {
-            Text(text = if(isAppearanceVisible) "Ocultar apariencia" else "mostrar apariencia")
+            Text(
+                text = if (isAppearanceVisible) "Ocultar apariencia" else "mostrar apariencia",
+                fontSize = 20.sp,
+                color = Color.White,
+                fontFamily = shaka_pow
+            )
         }
-        if(isAppearanceVisible) {
+        if (isAppearanceVisible) {
             HeroAppearance(dataHero.appearance)
         }
 
@@ -139,10 +166,17 @@ fun HeroDetails(
             modifier = modifier
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
+                .padding(16.dp),
+            colors = ButtonDefaults.buttonColors(Color.Red)
         ) {
-            Text(text = if(isWorkVisible) "Ocultar profesión" else "Mostrar profesión")
+            Text(
+                text = if (isWorkVisible) "Ocultar profesion" else "Mostrar profesi0n",
+                fontSize = 20.sp,
+                color = Color.White,
+                fontFamily = shaka_pow
+            )
         }
-        if(isWorkVisible) {
+        if (isWorkVisible) {
             HeroWork(heroWork = dataHero.work)
         }
 
@@ -151,8 +185,15 @@ fun HeroDetails(
             modifier = modifier
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
+                .padding(16.dp),
+            colors = ButtonDefaults.buttonColors(Color.Red)
         ) {
-            Text(text = if(isConnectionsVisible) "Ocultar connecciones" else "Mostrar conecciones")
+            Text(
+                text = if (isConnectionsVisible) "Ocultar connecciones" else "Mostrar conecciones",
+                fontSize = 20.sp,
+                color = Color.White,
+                fontFamily = shaka_pow
+            )
         }
         if (isConnectionsVisible) {
             HeroConnections(heroConnections = dataHero.connections)
@@ -181,10 +222,6 @@ fun HeroConnections(heroConnections: Connections, modifier: Modifier = Modifier)
     }
 
 
-
-
-
-
 }
 
 @Composable
@@ -194,7 +231,7 @@ fun HeroWork(heroWork: Work, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column {
-            Text("Profesión: $")
+            Text("Profesion: $")
             Text("Base: $")
         }
     }
@@ -209,7 +246,7 @@ fun HeroAppearance(heroAppearance: Appearance, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column {
-            Text("Género biológico: $") //lo dejo así para que nadie se ofenda
+            Text("Genero biologico: $") //lo dejo así para que nadie se ofenda
             Text("Raza: $")
             Text("Altura: $")
             Text("Peso: $")
@@ -221,14 +258,13 @@ fun HeroAppearance(heroAppearance: Appearance, modifier: Modifier = Modifier) {
 }
 
 
-
 @Composable
 fun HeroBiography(biography: Biography, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column{
+        Column {
             Text("Nombre: ${biography.fullName}")
             Text("Alter-Egos: ${biography.alterEgos}")
             Text(text = "Apodos: ${biography.aliases}")
