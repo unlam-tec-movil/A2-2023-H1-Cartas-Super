@@ -26,12 +26,12 @@
             android:label="@string/title_activity_new_game"
             android:theme="@style/Theme.Mobile2_Scaffolding" />
         <activity
-            android:name=".ui.CollectionActivity"
+            android:name=".ui.collection.CollectionActivity"
             android:exported="false"
             android:label="@string/title_activity_collection"
             android:theme="@style/Theme.Mobile2_Scaffolding" />
         <activity
-            android:name=".ui.HeroDetailActivity"
+            android:name=".ui.heroDetail.HeroDetailActivity"
             android:exported="false"
             android:label="@string/title_activity_hero_detail"
             android:theme="@style/Theme.Mobile2_Scaffolding" />

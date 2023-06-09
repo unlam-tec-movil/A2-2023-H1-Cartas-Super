@@ -8,4 +8,6 @@ interface IHeroRepository {
     fun getAdversaryDeck(difficulty: Difficulty): List<DataHero>
     fun getRandomPlayerDeck(): List<DataHero>
     fun getAdversaryDeck(): List<DataHero>
+    fun getHero(heroId:Int):DataHero
+    fun getAllHero():List<DataHero>
 }
