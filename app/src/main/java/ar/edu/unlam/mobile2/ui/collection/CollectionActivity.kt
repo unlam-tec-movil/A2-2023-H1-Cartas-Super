@@ -1,9 +1,10 @@
-package ar.edu.unlam.mobile2.ui
+package ar.edu.unlam.mobile2.ui.collection
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -13,22 +14,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
@@ -40,9 +35,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.DataHero
+import ar.edu.unlam.mobile2.ui.heroDetail.HeroDetailActivity
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CollectionActivity : ComponentActivity() {
+
+    val viewModel by viewModels<CollectionViewModelImp>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -52,7 +52,7 @@ class CollectionActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PantallaPruebaCollection()
+                    PantallaCollection(heroListState = viewModel.heroList)
                 }
             }
         }
@@ -62,7 +62,7 @@ class CollectionActivity : ComponentActivity() {
 
 @Preview
 @Composable
-fun PantallaPruebaCollection() {
+fun PantallaCollection(modifier:Modifier = Modifier, heroListState:HeroListState = HeroListState()) {
     Box{
         Image(
             painter = painterResource(id = R.drawable.fondo_coleccion),
@@ -70,7 +70,13 @@ fun PantallaPruebaCollection() {
             contentScale = ContentScale.FillHeight,
             modifier = Modifier.fillMaxSize()
         )
-        Galeria(heroList = dataHeroTestList())
+        if(heroListState.isLoading) {
+            Box(modifier = modifier.fillMaxSize()) {
+                CircularProgressIndicator(modifier = modifier.align(Alignment.Center))
+            }
+        } else {
+            Galeria(heroList = heroListState.heroList)
+        }
     }
     
 }
