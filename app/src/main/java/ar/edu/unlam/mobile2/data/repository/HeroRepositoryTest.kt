@@ -80,29 +80,29 @@ class HeroRepositoryTest @Inject constructor(): IHeroRepository {
         return listOf(hero1,hero2,hero3)
     }
 
-    override fun getPlayerDeck(idDeck: Int): List<DataHero> {
+    override suspend fun getPlayerDeck(idDeck: Int): List<DataHero> {
         return heroListTest1()
     }
 
-    override fun getAdversaryDeck(difficulty: Difficulty): List<DataHero> {
+    override suspend fun getAdversaryDeck(difficulty: Difficulty): List<DataHero> {
         return heroListTest2()
     }
 
-    override fun getAdversaryDeck(): List<DataHero> {
+    override suspend fun getAdversaryDeck(): List<DataHero> {
         return heroListTest2()
     }
 
-    override fun getRandomPlayerDeck(): List<DataHero> {
+    override suspend fun getRandomPlayerDeck(): List<DataHero> {
         return heroListTest1()
     }
 
-    override fun getHero(heroId: Int): DataHero {
+    override suspend fun getHero(heroId: Int): DataHero {
         return DataHero(id = heroId.toString())
     }
 
-    override fun getAllHero(): List<DataHero> {
+    override suspend fun getAllHero(): List<DataHero> {
         val dataHeroTestList = mutableListOf<DataHero>()
-        for(i in 0..9999) {
+        for(i in 1..731) {
             dataHeroTestList.add(
                 DataHero(name = "Test $i", id = "$i", isFavorite = i%3 == 0)
             )

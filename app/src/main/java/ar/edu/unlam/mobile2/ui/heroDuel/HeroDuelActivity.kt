@@ -248,11 +248,11 @@ fun SelectCard(modifier:Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
     }
 }
 
-@Preview(showBackground = true)
+
 @Composable
 fun PlayerDeckNVM(
     modifier: Modifier = Modifier,
-    playerDeck: List<DataHero> = HeroRepositoryTest().getPlayerDeck(1)
+    playerDeck: List<DataHero>
 ) {
     LazyColumn(
         modifier = modifier,

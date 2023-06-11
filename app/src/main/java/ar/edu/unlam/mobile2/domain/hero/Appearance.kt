@@ -1,10 +1,10 @@
 package ar.edu.unlam.mobile2.domain.hero
 
 data class Appearance(
-    val eyeColor: String = "",
-    val gender: String = "",
-    val hairColor: String = "",
+    val eyeColor: String = "NA",
+    val gender: String = "NA",
+    val hairColor: String = "NA",
     val height: List<String> = listOf(),
-    val race: String = "",
+    val race: String = "NA",
     val weight: List<String> = listOf()
 )

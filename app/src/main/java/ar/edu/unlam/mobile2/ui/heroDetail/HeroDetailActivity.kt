@@ -221,8 +221,8 @@ fun HeroConnections(heroConnections: Connections, modifier: Modifier = Modifier)
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column {
-            Text(text = "Afiliación grupal: $")
-            Text(text = "Parientes: $")
+            Text(text = "Afiliación grupal: ${heroConnections.groupAffiliation}")
+            Text(text = "Personas más cercanas: ${heroConnections.relatives}")
         }
     }
 
@@ -236,8 +236,8 @@ fun HeroWork(heroWork: Work, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column {
-            Text("Profesion: $")
-            Text("Base: $")
+            Text("Profesion: ${heroWork.occupation}")
+            Text("Base: ${heroWork.base}")
         }
     }
 
@@ -251,12 +251,12 @@ fun HeroAppearance(heroAppearance: Appearance, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column {
-            Text("Genero biologico: $") //lo dejo así para que nadie se ofenda
-            Text("Raza: $")
-            Text("Altura: $")
-            Text("Peso: $")
-            Text("Color de ojos: $")
-            Text("Color del cabello: $")
+            Text("Genero biologico: ${heroAppearance.gender}") //lo dejo así para que nadie se ofenda
+            Text("Raza: ${heroAppearance.race}")
+            Text("Altura: ${heroAppearance.height}")
+            Text("Peso: ${heroAppearance.weight}")
+            Text("Color de ojos: ${heroAppearance.eyeColor}")
+            Text("Color del cabello: ${heroAppearance.hairColor}")
         }
     }
 
@@ -302,14 +302,14 @@ fun HeroStats(stats: Powerstats, modifier: Modifier = Modifier) {
                 .padding(8.dp)
         ) {
             Column(modifier = modifier.padding(8.dp)) {
-                Text("Inteligencia: $")
-                Text("Velocidad: $")
-                Text("Durabilidad: $")
+                Text("Inteligencia: ${stats.intelligence}")
+                Text("Velocidad: ${stats.speed}")
+                Text("Durabilidad: ${stats.durability}")
             }
             Column(modifier = modifier.padding(8.dp)) {
-                Text("Fuerza: $")
-                Text("Poder: $")
-                Text("Combate: $")
+                Text("Fuerza: ${stats.strength}")
+                Text("Poder: ${stats.power}")
+                Text("Combate: ${stats.combat}")
             }
         }
     }

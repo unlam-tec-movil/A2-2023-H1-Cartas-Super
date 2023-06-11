@@ -1,5 +1,6 @@
 package ar.edu.unlam.mobile2.di
 
+import ar.edu.unlam.mobile2.data.repository.HeroRepository
 import ar.edu.unlam.mobile2.data.repository.HeroRepositoryTest
 import ar.edu.unlam.mobile2.data.repository.IHeroRepository
 import dagger.Module
@@ -16,6 +17,7 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideHeroRepository():IHeroRepository {
-        return HeroRepositoryTest()
+        //return HeroRepositoryTest()
+        return HeroRepository()
     }
 }
