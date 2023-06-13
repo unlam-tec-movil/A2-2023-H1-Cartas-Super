@@ -42,7 +42,7 @@ import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
 
 class Quiz : ComponentActivity() {
 
-    val viewModel by viewModels<SuperheroViewModel> ()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -52,7 +52,6 @@ class Quiz : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    viewModel.fetchHeroImage("100")
                     PantallaQuiz()
                     QuizItem()
                 }

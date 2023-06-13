@@ -1,11 +1,13 @@
 package ar.edu.unlam.mobile2.domain.hero
 
+import com.google.gson.annotations.SerializedName
+
 data class Biography(
-    val aliases: List<String> = listOf(),
-    val alignment: String = "NA",
-    val alterEgos: String = "NA",
-    val firstAppearance: String = "NA",
-    val fullName: String = "NA",
-    val placeOfBirth: String = "NA",
-    val publisher: String = "NA"
+    @SerializedName("aliases") val aliases: List<String> = listOf(),
+    @SerializedName("alignment") val alignment: String = "NA",
+    @SerializedName("alterEgos") val alterEgos: String = "NA",
+    @SerializedName("firstAppearance") val firstAppearance: String = "NA",
+    @SerializedName("fullName") val fullName: String = "NA",
+    @SerializedName("placeOfBirth") val placeOfBirth: String = "NA",
+    @SerializedName("publisher") val publisher: String = "NA"
 )
