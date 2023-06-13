@@ -1,14 +1,16 @@
 package ar.edu.unlam.mobile2.domain.hero
 
+import com.google.gson.annotations.SerializedName
+
 data class DataHero(
-    val appearance: Appearance = Appearance(),
-    val biography: Biography = Biography(),
-    val connections: Connections = Connections(),
-    val id: String = "NA",
-    val image: Image = Image(),
-    val name: String = "NA",
-    val powerstats: Powerstats = Powerstats(),
-    val response: String = "NA",
-    val work: Work = Work(),
+    @SerializedName("appearance") val appearance: Appearance = Appearance(),
+    @SerializedName("biography") val biography: Biography = Biography(),
+    @SerializedName("connections") val connections: Connections = Connections(),
+    @SerializedName("id") val id: String = "NA",
+    @SerializedName("image") val image: Image = Image(),
+    @SerializedName("name") val name: String = "NA",
+    @SerializedName("powerstats") val powerstats: Powerstats = Powerstats(),
+    @SerializedName("response") val response: String = "NA",
+    @SerializedName("work") val work: Work = Work(),
     val isFavorite: Boolean = false
 )

@@ -11,9 +11,12 @@ import ar.edu.unlam.mobile2.domain.heroDuel.HeroDuelManager
 import ar.edu.unlam.mobile2.domain.heroDuel.Multiplier
 import ar.edu.unlam.mobile2.domain.heroDuel.Stat
 import ar.edu.unlam.mobile2.domain.heroDuel.Winner
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HeroDuelViewModelImp (private val repo: IHeroRepository = HeroRepositoryTest()) : ViewModel() {
+@HiltViewModel
+class HeroDuelViewModelImp @Inject constructor(private val repo: IHeroRepository) : ViewModel() {
     var playerDeckState by mutableStateOf(DeckState())
         private set //para que la variable no pueda ser seteada por fuera de la clase
     var adversaryDeckState by mutableStateOf(DeckState())
@@ -36,6 +39,10 @@ class HeroDuelViewModelImp (private val repo: IHeroRepository = HeroRepositoryTe
     var gameWinner by mutableStateOf(Winner.PLAYER)
         private set
 
+    private val DECK_SIZE = 3
+
+
+
 
     init {
         val playerDeckJob = viewModelScope.launch {
@@ -43,7 +50,7 @@ class HeroDuelViewModelImp (private val repo: IHeroRepository = HeroRepositoryTe
                 isLoading = true
             )
             playerDeckState = playerDeckState.copy(
-                deck = repo.getRandomPlayerDeck(),
+                deck = repo.getRandomPlayerDeck(DECK_SIZE),
                 isLoading = false
             )
         }
@@ -52,7 +59,7 @@ class HeroDuelViewModelImp (private val repo: IHeroRepository = HeroRepositoryTe
                 isLoading = true
             )
             adversaryDeckState = adversaryDeckState.copy(
-                deck = repo.getAdversaryDeck(),
+                deck = repo.getAdversaryDeck(DECK_SIZE),
                 isLoading = false
             )
         }

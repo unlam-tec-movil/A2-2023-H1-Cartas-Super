@@ -1,10 +1,12 @@
 package ar.edu.unlam.mobile2.domain.hero
 
+import com.google.gson.annotations.SerializedName
+
 data class Appearance(
-    val eyeColor: String = "NA",
-    val gender: String = "NA",
-    val hairColor: String = "NA",
-    val height: List<String> = listOf(),
-    val race: String = "NA",
-    val weight: List<String> = listOf()
+    @SerializedName("eyeColor") val eyeColor: String = "NA",
+    @SerializedName("gender") val gender: String = "NA",
+    @SerializedName("hairColor") val hairColor: String = "NA",
+    @SerializedName("height") val height: List<String> = listOf(),
+    @SerializedName("race") val race: String = "NA",
+    @SerializedName("weight") val weight: List<String> = listOf()
 )

@@ -1,10 +1,12 @@
 package ar.edu.unlam.mobile2.domain.hero
 
+import com.google.gson.annotations.SerializedName
+
 data class Powerstats(
-    val combat: String = "NA",
-    val durability: String = "NA",
-    val intelligence: String = "NA",
-    val power: String = "NA",
-    val speed: String = "NA",
-    val strength: String = "NA"
+    @SerializedName("combat") val combat: String = "NA",
+    @SerializedName("durability") val durability: String = "NA",
+    @SerializedName("intelligence") val intelligence: String = "NA",
+    @SerializedName("power") val power: String = "NA",
+    @SerializedName("speed") val speed: String = "NA",
+    @SerializedName("strength") val strength: String = "NA"
 )

@@ -50,14 +50,14 @@ import ar.edu.unlam.mobile2.domain.hero.Powerstats
 import ar.edu.unlam.mobile2.domain.heroDuel.Winner
 import ar.edu.unlam.mobile2.ui.NewGameActivity
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HeroDuelActivity : ComponentActivity() {
-    lateinit var viewModel : HeroDuelViewModelImp
+    val viewModel by viewModels<HeroDuelViewModelImp>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val vm by viewModels<HeroDuelViewModelImp>()
-        viewModel = vm
         setContent {
             Mobile2_ScaffoldingTheme {
                 // A surface container using the 'background' color from the theme

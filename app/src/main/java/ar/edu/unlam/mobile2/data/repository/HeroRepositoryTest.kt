@@ -80,21 +80,19 @@ class HeroRepositoryTest @Inject constructor(): IHeroRepository {
         return listOf(hero1,hero2,hero3)
     }
 
-    override suspend fun getPlayerDeck(idDeck: Int): List<DataHero> {
+    suspend fun getPlayerDeck(idDeck: Int): List<DataHero> {
         return heroListTest1()
     }
 
-    override suspend fun getAdversaryDeck(difficulty: Difficulty): List<DataHero> {
+
+    override suspend fun getAdversaryDeck(size: Int): List<DataHero> {
         return heroListTest2()
     }
 
-    override suspend fun getAdversaryDeck(): List<DataHero> {
-        return heroListTest2()
-    }
-
-    override suspend fun getRandomPlayerDeck(): List<DataHero> {
+    override suspend fun getRandomPlayerDeck(size: Int): List<DataHero> {
         return heroListTest1()
     }
+
 
     override suspend fun getHero(heroId: Int): DataHero {
         return DataHero(id = heroId.toString())

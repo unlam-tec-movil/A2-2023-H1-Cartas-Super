@@ -1,6 +1,8 @@
 package ar.edu.unlam.mobile2.domain.hero
 
+import com.google.gson.annotations.SerializedName
+
 data class Connections(
-    val groupAffiliation: String = "NA",
-    val relatives: String = "NA"
+    @SerializedName("groupAffiliation") val groupAffiliation: String = "NA",
+    @SerializedName("relatives") val relatives: String = "NA"
 )

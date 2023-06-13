@@ -1,5 +1,7 @@
 package ar.edu.unlam.mobile2.di
 
+import ar.edu.unlam.mobile2.data.database.dao.HeroDao
+import ar.edu.unlam.mobile2.data.network.HeroService
 import ar.edu.unlam.mobile2.data.repository.HeroRepository
 import ar.edu.unlam.mobile2.data.repository.HeroRepositoryTest
 import ar.edu.unlam.mobile2.data.repository.IHeroRepository
@@ -16,8 +18,8 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideHeroRepository():IHeroRepository {
+    fun provideHeroRepository(api:HeroService,db:HeroDao):IHeroRepository {
         //return HeroRepositoryTest()
-        return HeroRepository()
+        return HeroRepository(api,db)
     }
 }
