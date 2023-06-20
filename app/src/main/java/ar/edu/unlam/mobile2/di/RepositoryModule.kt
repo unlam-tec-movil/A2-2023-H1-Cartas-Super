@@ -19,7 +19,6 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideHeroRepository(api:HeroService,db:HeroDao):IHeroRepository {
-        //return HeroRepositoryTest()
         return HeroRepository(api,db)
     }
 }
