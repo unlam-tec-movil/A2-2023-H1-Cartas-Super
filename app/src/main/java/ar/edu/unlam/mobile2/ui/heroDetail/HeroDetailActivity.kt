@@ -37,6 +37,11 @@ import ar.edu.unlam.mobile2.domain.hero.Appearance
 import ar.edu.unlam.mobile2.domain.hero.Biography
 import ar.edu.unlam.mobile2.domain.hero.Connections
 import ar.edu.unlam.mobile2.domain.hero.DataHero
+import ar.edu.unlam.mobile2.domain.hero.HeroAppearance
+import ar.edu.unlam.mobile2.domain.hero.HeroBiography
+import ar.edu.unlam.mobile2.domain.hero.HeroConnections
+import ar.edu.unlam.mobile2.domain.hero.HeroStats
+import ar.edu.unlam.mobile2.domain.hero.HeroWork
 import ar.edu.unlam.mobile2.domain.hero.Powerstats
 import ar.edu.unlam.mobile2.domain.hero.Work
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
@@ -45,7 +50,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HeroDetailActivity : ComponentActivity() {
-    val viewModel by viewModels<HeroDetailViewModelImp>()
+    private val viewModel by viewModels<HeroDetailViewModelImp>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val myIntent: Intent = intent
@@ -60,18 +65,21 @@ class HeroDetailActivity : ComponentActivity() {
                 ) {
                     HeroDetailFondo()
                     HeroDetails(dataHero = viewModel.hero.dataHero)
-                    //HeroDetails(dataHero = DataHero(id = "idString!!", name = "Test idString"))
                 }
             }
         }
     }
 }
 
+/* ////////////////////////////////////////////////////////////////////////////////////////////////
+    REFACTORIZAR BOTONES PARA SIMPLIFICAR CÓDIGO //////////////////////////////////////////////////
+ */////////////////////////////////////////////////////////////////////////////////////////////////
+
 @Composable
 fun HeroDetailFondo() {
     Image(
         painter = painterResource(id = R.drawable.fondo_coleccion),
-        contentDescription = "Pantalla Coleccion",
+        contentDescription = "Pantalla etalles del héroe",
         contentScale = ContentScale.FillHeight,
         modifier = Modifier.fillMaxSize()
     )
@@ -88,8 +96,6 @@ fun HeroDetails(
     var isAppearanceVisible by rememberSaveable { mutableStateOf(true) }
     var isWorkVisible by rememberSaveable { mutableStateOf(true) }
     var isConnectionsVisible by rememberSaveable { mutableStateOf(true) }
-
-    //modifier = modifier.align(Alignment.CenterHorizontally)
 
     Column(
         modifier = modifier
@@ -144,7 +150,7 @@ fun HeroDetails(
             )
         }
         if (isBiographyVisible) {
-            HeroBiography(dataHero.biography)
+            HeroBiography(biography = dataHero.biography)
         }
 
         Button(
@@ -163,7 +169,7 @@ fun HeroDetails(
             )
         }
         if (isAppearanceVisible) {
-            HeroAppearance(dataHero.appearance)
+            HeroAppearance(heroAppearance = dataHero.appearance)
         }
 
         Button(
@@ -203,137 +209,5 @@ fun HeroDetails(
         if (isConnectionsVisible) {
             HeroConnections(heroConnections = dataHero.connections)
         }
-
     }
 }
-
-
-@Composable
-fun HeroDetailsPreview() {
-    HeroDetails(dataHero = DataHero())
-}
-
-@Composable
-fun HeroConnections(heroConnections: Connections, modifier: Modifier = Modifier) {
-
-    Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Column {
-            Text(text = "Afiliación grupal: ${heroConnections.groupAffiliation}")
-            Text(text = "Personas más cercanas: ${heroConnections.relatives}")
-        }
-    }
-
-
-}
-
-@Composable
-fun HeroWork(heroWork: Work, modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Column {
-            Text("Profesion: ${heroWork.occupation}")
-            Text("Base: ${heroWork.base}")
-        }
-    }
-
-
-}
-
-@Composable
-fun HeroAppearance(heroAppearance: Appearance, modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Column {
-            Text("Genero biologico: ${heroAppearance.gender}") //lo dejo así para que nadie se ofenda
-            Text("Raza: ${heroAppearance.race}")
-            Text("Altura: ${heroAppearance.height}")
-            Text("Peso: ${heroAppearance.weight}")
-            Text("Color de ojos: ${heroAppearance.eyeColor}")
-            Text("Color del cabello: ${heroAppearance.hairColor}")
-        }
-    }
-
-}
-
-
-@Composable
-fun HeroBiography(biography: Biography, modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Column {
-            Text("Nombre: ${biography.fullName}")
-            Text("Alter-Egos: ${biography.alterEgos}")
-            Text(text = "Apodos: ${biography.aliases}")
-            Text("Lugar de nacimiento: ${biography.placeOfBirth}")
-            Text("Primera aparición: ${biography.firstAppearance}")
-            Text("Editorial: ${biography.publisher}")
-            Text("Alineación: ${biography.alignment}")
-        }
-    }
-
-
-}
-
-
-@Composable
-fun HeroBiographyPreview() {
-    HeroBiography(biography = Biography())
-}
-
-
-@Composable
-fun HeroStats(stats: Powerstats, modifier: Modifier = Modifier) {
-
-    Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Row(
-            modifier = modifier
-                .padding(8.dp)
-        ) {
-            Column(modifier = modifier.padding(8.dp)) {
-                Text("Inteligencia: ${stats.intelligence}")
-                Text("Velocidad: ${stats.speed}")
-                Text("Durabilidad: ${stats.durability}")
-            }
-            Column(modifier = modifier.padding(8.dp)) {
-                Text("Fuerza: ${stats.strength}")
-                Text("Poder: ${stats.power}")
-                Text("Combate: ${stats.combat}")
-            }
-        }
-    }
-
-}
-
-
-@Composable
-fun PreviewHeroStats() {
-    HeroStats(stats = Powerstats())
-}
-/*
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Mobile2_ScaffoldingTheme {
-        Greeting("Android")
-    }
-}*/

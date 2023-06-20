@@ -31,6 +31,7 @@ import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
 import ar.edu.unlam.mobile2.ui.collection.CollectionActivity
 import ar.edu.unlam.mobile2.ui.heroDuel.HeroDuelActivity
+import ar.edu.unlam.mobile2.ui.quiz.QuizActivity
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
 import dagger.hilt.android.AndroidEntryPoint
@@ -126,7 +127,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
 
             Button(
                 onClick = {
-                    context.startActivity(Intent(context, Quiz::class.java))
+                    context.startActivity(Intent(context, QuizActivity::class.java))
                 },
                 colors = ButtonDefaults.buttonColors(Color.Yellow)
             ) {
