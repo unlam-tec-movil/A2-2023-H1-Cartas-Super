@@ -40,6 +40,7 @@ import ar.edu.unlam.mobile2.domain.hero.DataHero
 import ar.edu.unlam.mobile2.domain.hero.HeroAppearance
 import ar.edu.unlam.mobile2.domain.hero.HeroBiography
 import ar.edu.unlam.mobile2.domain.hero.HeroConnections
+import ar.edu.unlam.mobile2.domain.hero.HeroImage
 import ar.edu.unlam.mobile2.domain.hero.HeroStats
 import ar.edu.unlam.mobile2.domain.hero.HeroWork
 import ar.edu.unlam.mobile2.domain.hero.Powerstats
@@ -102,6 +103,13 @@ fun HeroDetails(
             .verticalScroll(state = rememberScrollState())
     ) {
 
+        HeroImage(modifier = Modifier
+            .padding(8.dp)
+            .align(Alignment.CenterHorizontally)
+            .fillMaxWidth(),
+            url = dataHero.image.url
+        )
+        /*
         Image(
             painter = painterResource(id = R.drawable.default_imagen_heroe),
             contentDescription = "Imagen heroe",
@@ -110,6 +118,8 @@ fun HeroDetails(
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
         )
+
+         */
         Row(
             modifier = modifier.align(Alignment.CenterHorizontally)
         ) {
