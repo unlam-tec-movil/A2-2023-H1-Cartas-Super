@@ -30,11 +30,13 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.DataHero
+import ar.edu.unlam.mobile2.domain.hero.HeroImage
 import ar.edu.unlam.mobile2.ui.heroDetail.HeroDetailActivity
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -136,6 +138,10 @@ fun GaleriaItem(modifier: Modifier = Modifier,
                 .background(brush = SolidColor(Color.Black), alpha = 0.25f)
         ) {
             Column {
+                HeroImage(
+                    url = dataHero.image.url
+                )
+                /*
                 Image(
                     painter = painterResource(id = painterDefaultResourceId),
                     contentDescription = "Imagen heroe",
@@ -144,11 +150,14 @@ fun GaleriaItem(modifier: Modifier = Modifier,
                         .align(Alignment.CenterHorizontally)
                         .padding(8.dp)
                 )
+
+                 */
                 Text(dataHero.name,
                     modifier = modifier
                         .padding(bottom = 8.dp)
                         .align(Alignment.CenterHorizontally),
-                    color = Color.Black
+                    color = Color.Black,
+                    textAlign = TextAlign.Center
                 )
             }
             Text(
