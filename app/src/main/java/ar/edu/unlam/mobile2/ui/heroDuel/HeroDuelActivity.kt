@@ -16,9 +16,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenuItem
@@ -65,6 +67,7 @@ class HeroDuelActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    HeroDuelFondo()
                     HeroDuelUI(
                         modifier = Modifier,
                         viewModel = viewModel
@@ -74,13 +77,22 @@ class HeroDuelActivity : ComponentActivity() {
         }
     }
 }
+@Composable
+fun HeroDuelFondo() {
+    Image(
+        painter = painterResource(id = R.drawable.fondo_pantalla_pelea),
+        contentDescription = "Pantalla NewGame",
+        contentScale = ContentScale.FillBounds,
+        modifier = Modifier.fillMaxSize()
+    )
+}
 
 @Composable
 fun HeroDuelUI(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
-    if(viewModel.showGameWinner) {
-        Text(text = "el ganador es " + if(viewModel.gameWinner == Winner.PLAYER) "el jugador" else "el adversario")
+    if (viewModel.showGameWinner) {
+        Text(text = "el ganador es " + if (viewModel.gameWinner == Winner.PLAYER) "el jugador" else "el adversario")
     } else {
-        if(viewModel.showSelectCardMenu) {
+        if (viewModel.showSelectCardMenu) {
             SelectCard(modifier = modifier, viewModel = viewModel)
         } else {
             viewModel.showActionMenu(true)
@@ -93,18 +105,19 @@ fun HeroDuelUI(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
 @Composable
 fun HeroDuel(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
     val playerCard = viewModel.playerDeckState.deck[viewModel.playerDeckState.selectedCardIndex]
-    val adversaryCard = viewModel.adversaryDeckState.deck[viewModel.adversaryDeckState.selectedCardIndex]
-    
-    Row(modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-        Column(modifier = modifier.weight(3f)) {
-            HeroCard(modifier = modifier, hero = adversaryCard)
-            HeroCard(modifier = modifier, hero = playerCard)
-        }
-        if(viewModel.showActionMenu) {
+    val adversaryCard =
+        viewModel.adversaryDeckState.deck[viewModel.adversaryDeckState.selectedCardIndex]
+
+    Column(modifier = modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+
+        HeroCard(modifier = modifier, hero = adversaryCard)
+
+        if (viewModel.showActionMenu) {
             ActionMenu(modifier = modifier.weight(2.3f), viewModel = viewModel)
         } else {
             DuelResult(modifier = modifier.weight(2.3f), viewModel = viewModel)
         }
+        HeroCard(modifier = modifier, hero = playerCard)
 
     }
 }
@@ -112,7 +125,7 @@ fun HeroDuel(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
 @Composable
 fun DuelResult(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
     val playerWon = viewModel.heroDuelWinner == Winner.PLAYER
-    val mensaje = if(playerWon) {
+    val mensaje = if (playerWon) {
         "¡Ganaste esta pelea y conservarás tu carta!"
     } else {
         "Perdiste esta pela y se envió tu carta al cementerio."
@@ -122,7 +135,7 @@ fun DuelResult(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
         Button(
             modifier = modifier,
             onClick = {
-                if(playerWon)
+                if (playerWon)
                     viewModel.showActionMenu(true)
                 else {
                     viewModel.showActionMenu(false)
@@ -137,10 +150,9 @@ fun DuelResult(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
 }
 
 
-
 @Composable
-fun ActionMenu(modifier:Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.Top) {
+fun ActionMenu(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
+    Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceBetween) {
         SelectStat(viewModel = viewModel)
         SelectMultiplier(viewModel = viewModel)
         Button(
@@ -155,7 +167,7 @@ fun ActionMenu(modifier:Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
 }
 
 @Composable
-fun SelectMultiplier(modifier:Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
+fun SelectMultiplier(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
     var checked by rememberSaveable {
         mutableStateOf(false)
     }
@@ -173,7 +185,7 @@ fun SelectMultiplier(modifier:Modifier = Modifier, viewModel: HeroDuelViewModelI
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SelectStat(modifier:Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
+fun SelectStat(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
     var expanded by rememberSaveable {
         mutableStateOf(false)
     }
@@ -182,8 +194,9 @@ fun SelectStat(modifier:Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
 
     Box(
         modifier = modifier
-            .fillMaxWidth()
+            //.fillMaxWidth()
             .padding(8.dp)
+            .width(128.dp)
     ) {
         ExposedDropdownMenuBox(
             expanded = expanded,
@@ -218,7 +231,7 @@ fun SelectStat(modifier:Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
 
 
 @Composable
-fun SelectCard(modifier:Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
+fun SelectCard(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
     val playerDeckIsLoading = viewModel.playerDeckState.isLoading
     val aIDeckIsLoading = viewModel.adversaryDeckState.isLoading
     if (playerDeckIsLoading or aIDeckIsLoading) {
@@ -263,7 +276,7 @@ fun PlayerDeckNVM(
                     hero = playerDeck[i]
                 )
             }
-        } )
+        })
 }
 
 @Composable
@@ -283,40 +296,44 @@ fun PlayerDeck(
                     hero = playerDeck[i]
                 )
             }
-        } )
+        })
 }
 
 @Preview(showBackground = true)
 @Composable
 fun HeroCard(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
-    Column(
-        modifier = modifier
-            .padding(2.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            modifier = modifier
-                .clip(RoundedCornerShape(40.dp))
-                .padding(2.dp),
-            painter = painterResource( R.drawable.default_imagen_heroe ),
-            contentDescription = "${hero.name} portrait",
-            contentScale = ContentScale.Crop
-        )
-        Text(
-            modifier = modifier.padding(2.dp),
-            text = hero.name
-        )
-        HeroStats(
-            modifier = modifier
-                .padding(2.dp),
-            heroStats = hero.powerstats
-        )
+
+    Card(modifier = modifier.padding(16.dp)) {
+        Column(
+            modifier = modifier.padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                modifier = modifier
+                    .clip(RoundedCornerShape(40.dp))
+                    .padding(2.dp),
+                painter = painterResource(R.drawable.default_imagen_heroe),
+                contentDescription = "${hero.name} portrait",
+                contentScale = ContentScale.Crop
+            )
+            Text(
+                modifier = modifier.padding(2.dp),
+                text = hero.name
+            )
+            HeroStats(
+                modifier = modifier
+                    .padding(2.dp),
+                heroStats = hero.powerstats
+            )
+        }
+
     }
+
 }
 
 @Preview(showBackground = true)
 @Composable
-fun HeroItem(modifier : Modifier = Modifier, hero: DataHero = DataHero()) {
+fun HeroItem(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -324,10 +341,11 @@ fun HeroItem(modifier : Modifier = Modifier, hero: DataHero = DataHero()) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            modifier = modifier.size(125.dp)
+            modifier = modifier
+                .size(125.dp)
                 .clip(RoundedCornerShape(40.dp))
                 .padding(2.dp),
-            painter = painterResource( R.drawable.default_imagen_heroe ),
+            painter = painterResource(R.drawable.default_imagen_heroe),
             contentDescription = "${hero.name} portrait",
             contentScale = ContentScale.Crop
         )

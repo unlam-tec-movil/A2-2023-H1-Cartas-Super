@@ -99,7 +99,7 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
 
             Button(
                 onClick = {
-                    //context.startActivity(Intent(context, CollectionActivity::class.java))
+                    context.startActivity(Intent(context, HeroDuelActivity::class.java))
                 },
                 modifier = Modifier.wrapContentSize().padding(16.dp),
                 colors = ButtonDefaults.buttonColors(Color.Yellow)
@@ -137,13 +137,13 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
                     fontFamily = shaka_pow
                 )
             }
-            Button(
+            /*Button(
                 onClick = {
                     context.startActivity(Intent(context, HeroDuelActivity::class.java))
                 },
             ) {
                 Text(text = "ir pantalla HeroDuel")
-            }
+            }*/
 
         }
     }
