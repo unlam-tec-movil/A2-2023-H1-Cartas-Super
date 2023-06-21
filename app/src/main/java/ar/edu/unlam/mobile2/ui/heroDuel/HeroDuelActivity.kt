@@ -6,21 +6,30 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenuItem
@@ -39,19 +48,31 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.data.repository.HeroRepositoryTest
 import ar.edu.unlam.mobile2.domain.hero.DataHero
+import ar.edu.unlam.mobile2.domain.hero.HeroImage
 import ar.edu.unlam.mobile2.domain.hero.Powerstats
 import ar.edu.unlam.mobile2.domain.heroDuel.Winner
 import ar.edu.unlam.mobile2.ui.NewGameActivity
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
+import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -77,6 +98,7 @@ class HeroDuelActivity : ComponentActivity() {
         }
     }
 }
+
 @Composable
 fun HeroDuelFondo() {
     Image(
@@ -89,8 +111,26 @@ fun HeroDuelFondo() {
 
 @Composable
 fun HeroDuelUI(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
+    val offset = Offset(6.0f, 4.0f)
     if (viewModel.showGameWinner) {
-        Text(text = "el ganador es " + if (viewModel.gameWinner == Winner.PLAYER) "el jugador" else "el adversario")
+        Text(
+            text = "El ganador es " + if (viewModel.gameWinner == Winner.PLAYER) "el jugador" else "el adversario",
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(16.dp, 300.dp),
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            fontFamily = shaka_pow,
+            style = TextStyle(
+                fontSize = 24.sp,
+                shadow = Shadow(
+                    color = Color.White,
+                    offset = offset,
+                    blurRadius = 4f
+                )
+            )
+
+        )
     } else {
         if (viewModel.showSelectCardMenu) {
             SelectCard(modifier = modifier, viewModel = viewModel)
@@ -124,16 +164,34 @@ fun HeroDuel(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
 
 @Composable
 fun DuelResult(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
+    val offset = Offset(6.0f, 4.0f)
     val playerWon = viewModel.heroDuelWinner == Winner.PLAYER
     val mensaje = if (playerWon) {
-        "¡Ganaste esta pelea y conservarás tu carta!"
+        //"¡Ganaste esta pelea y conservarás tu carta!"
+        "Ganaste esta pelea"
     } else {
-        "Perdiste esta pela y se envió tu carta al cementerio."
+        "Perdiste esta pelea"
+        //"Perdiste esta pelea y se envió tu carta al cementerio."
     }
-    Column(modifier = modifier.fillMaxSize()) {
-        Text(modifier = modifier, text = mensaje)
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp, 0.dp, 16.dp, 0.dp)
+    ) {
+        Text(
+            modifier = modifier, fontWeight = FontWeight.Bold, text = mensaje, style = TextStyle(
+                fontSize = 18.sp,
+                shadow = Shadow(
+                    color = Color.White,
+                    offset = offset,
+                    blurRadius = 4f
+                )
+            )
+        )
         Button(
-            modifier = modifier,
+            modifier = modifier
+                .width(70.dp)
+                .height(160.dp),
             onClick = {
                 if (playerWon)
                     viewModel.showActionMenu(true)
@@ -143,7 +201,7 @@ fun DuelResult(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
                 }
             }
         ) {
-            Text(modifier = modifier, text = "Continuar")
+            Text(modifier = modifier, textAlign = TextAlign.Center, text = "Continuar")
         }
     }
 
@@ -152,7 +210,11 @@ fun DuelResult(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
 
 @Composable
 fun ActionMenu(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
-    Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceBetween) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp, 0.dp, 16.dp, 0.dp), horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         SelectStat(viewModel = viewModel)
         SelectMultiplier(viewModel = viewModel)
         Button(
@@ -171,7 +233,7 @@ fun SelectMultiplier(modifier: Modifier = Modifier, viewModel: HeroDuelViewModel
     var checked by rememberSaveable {
         mutableStateOf(false)
     }
-    Row(modifier = modifier) {
+    Column(modifier = modifier) {
         Text(modifier = modifier, text = "Multi x2:")
         Checkbox(
             checked = checked,
@@ -194,9 +256,9 @@ fun SelectStat(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
 
     Box(
         modifier = modifier
-            //.fillMaxWidth()
-            .padding(8.dp)
-            .width(128.dp)
+            //.padding(8.dp)
+            .width(160.dp)
+            .height(24.dp)
     ) {
         ExposedDropdownMenuBox(
             expanded = expanded,
@@ -303,19 +365,27 @@ fun PlayerDeck(
 @Composable
 fun HeroCard(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
 
-    Card(modifier = modifier.padding(16.dp)) {
+    Card(modifier = modifier
+        .padding(16.dp)
+        .shadow(5.dp)) {
         Column(
             modifier = modifier.padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
+            /*Image(
                 modifier = modifier
                     .clip(RoundedCornerShape(40.dp))
                     .padding(2.dp),
                 painter = painterResource(R.drawable.default_imagen_heroe),
                 contentDescription = "${hero.name} portrait",
-                contentScale = ContentScale.Crop
-            )
+                contentScale = ContentScale.Crop,
+
+            )*/
+            Box(modifier = modifier.size(190.dp)) {
+                HeroImage(
+                    url = hero.image.url
+                )
+            }
             Text(
                 modifier = modifier.padding(2.dp),
                 text = hero.name
@@ -334,28 +404,38 @@ fun HeroCard(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
 @Preview(showBackground = true)
 @Composable
 fun HeroItem(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(2.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Image(
+    Card(modifier = modifier
+        .padding(16.dp, 8.dp, 16.dp, 8.dp)
+        .shadow(8.dp)) {
+        Row(
             modifier = modifier
-                .size(125.dp)
-                .clip(RoundedCornerShape(40.dp))
+                .fillMaxWidth()
                 .padding(2.dp),
-            painter = painterResource(R.drawable.default_imagen_heroe),
-            contentDescription = "${hero.name} portrait",
-            contentScale = ContentScale.Crop
-        )
-        Spacer(
-            modifier = modifier.padding(8.dp)
-        )
-        Text(
-            modifier = modifier.padding(2.dp),
-            text = hero.name
-        )
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            /*Image(
+                modifier = modifier
+                    .size(125.dp)
+                    .clip(RoundedCornerShape(40.dp))
+                    .padding(2.dp),
+                painter = painterResource(R.drawable.default_imagen_heroe),
+                contentDescription = "${hero.name} portrait",
+                contentScale = ContentScale.Crop
+            )*/
+            Box(modifier = modifier.size(120.dp).padding(4.dp)) {
+                HeroImage(
+                    url = hero.image.url
+                )
+
+            }
+            Spacer(
+                modifier = modifier.padding(8.dp)
+            )
+            Text(
+                modifier = modifier.padding(2.dp),
+                text = hero.name
+            )
+        }
     }
 }
 

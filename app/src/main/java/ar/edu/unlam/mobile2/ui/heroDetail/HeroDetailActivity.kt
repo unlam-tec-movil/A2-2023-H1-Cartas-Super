@@ -80,7 +80,7 @@ class HeroDetailActivity : ComponentActivity() {
 fun HeroDetailFondo() {
     Image(
         painter = painterResource(id = R.drawable.fondo_coleccion),
-        contentDescription = "Pantalla etalles del héroe",
+        contentDescription = "Pantalla detalles del héroe",
         contentScale = ContentScale.FillHeight,
         modifier = Modifier.fillMaxSize()
     )
