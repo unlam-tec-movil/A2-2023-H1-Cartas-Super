@@ -1,6 +1,7 @@
 package ar.edu.unlam.mobile2.ui.heroDuel
 
 import android.content.Intent
+import android.graphics.drawable.shapes.Shape
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -124,7 +125,7 @@ fun HeroDuelUI(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
             style = TextStyle(
                 fontSize = 24.sp,
                 shadow = Shadow(
-                    color = Color.White,
+                    color = Color.Black,
                     offset = offset,
                     blurRadius = 4f
                 )
@@ -182,7 +183,7 @@ fun DuelResult(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
             modifier = modifier, fontWeight = FontWeight.Bold, text = mensaje, style = TextStyle(
                 fontSize = 18.sp,
                 shadow = Shadow(
-                    color = Color.White,
+                    color = Color.Black,
                     offset = offset,
                     blurRadius = 4f
                 )
@@ -218,23 +219,39 @@ fun ActionMenu(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
         SelectStat(viewModel = viewModel)
         SelectMultiplier(viewModel = viewModel)
         Button(
+            colors = ButtonDefaults.buttonColors(Color.Red),
+            shape = ButtonDefaults.outlinedShape,
             onClick = {
                 viewModel.showActionMenu(false)
                 viewModel.startHeroDuelTurn()
             }
         ) {
-            Text(text = "¡Pelear!")
+            Text(
+                text = "¡Pelear!", fontWeight = FontWeight.Bold, style = TextStyle(
+                    fontSize = 18.sp
+                )
+            )
         }
     }
 }
 
 @Composable
 fun SelectMultiplier(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
+    val offset = Offset(6.0f, 4.0f)
     var checked by rememberSaveable {
         mutableStateOf(false)
     }
     Column(modifier = modifier) {
-        Text(modifier = modifier, text = "Multi x2:")
+        Text(
+            modifier = modifier, text = "Multi x2:", style = TextStyle(
+                fontSize = 18.sp,
+                shadow = Shadow(
+                    color = Color.Black,
+                    offset = offset,
+                    blurRadius = 4f
+                )
+            )
+        )
         Checkbox(
             checked = checked,
             onCheckedChange = {
@@ -256,12 +273,13 @@ fun SelectStat(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
 
     Box(
         modifier = modifier
-            //.padding(8.dp)
-            .width(160.dp)
-            .height(24.dp)
+        //.padding(8.dp)
+        //.width(160.dp)
+        //.height(24.dp)
     ) {
         ExposedDropdownMenuBox(
             expanded = expanded,
+            modifier = modifier.size(170.dp),
             onExpandedChange = {
                 expanded = !expanded
             }
@@ -365,9 +383,11 @@ fun PlayerDeck(
 @Composable
 fun HeroCard(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
 
-    Card(modifier = modifier
-        .padding(16.dp)
-        .shadow(5.dp)) {
+    Card(
+        modifier = modifier
+            .padding(16.dp)
+            .shadow(5.dp)
+    ) {
         Column(
             modifier = modifier.padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -404,9 +424,11 @@ fun HeroCard(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
 @Preview(showBackground = true)
 @Composable
 fun HeroItem(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
-    Card(modifier = modifier
-        .padding(16.dp, 8.dp, 16.dp, 8.dp)
-        .shadow(8.dp)) {
+    Card(
+        modifier = modifier
+            .padding(16.dp, 8.dp, 16.dp, 8.dp)
+            .shadow(8.dp)
+    ) {
         Row(
             modifier = modifier
                 .fillMaxWidth()
@@ -422,7 +444,11 @@ fun HeroItem(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
                 contentDescription = "${hero.name} portrait",
                 contentScale = ContentScale.Crop
             )*/
-            Box(modifier = modifier.size(120.dp).padding(4.dp)) {
+            Box(
+                modifier = modifier
+                    .size(120.dp)
+                    .padding(4.dp)
+            ) {
                 HeroImage(
                     url = hero.image.url
                 )
