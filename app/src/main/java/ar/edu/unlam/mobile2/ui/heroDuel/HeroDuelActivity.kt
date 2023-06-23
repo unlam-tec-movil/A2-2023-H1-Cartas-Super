@@ -181,7 +181,7 @@ fun DuelResult(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
     ) {
         Text(
             modifier = modifier, fontWeight = FontWeight.Bold, text = mensaje, style = TextStyle(
-                fontSize = 18.sp,
+                fontSize = 17.sp,
                 shadow = Shadow(
                     color = Color.Black,
                     offset = offset,
