@@ -1,11 +1,10 @@
 package ar.edu.unlam.mobile2.data.repository
 
-import ar.edu.unlam.mobile2.domain.difficulty.Difficulty
 import ar.edu.unlam.mobile2.domain.hero.DataHero
 import ar.edu.unlam.mobile2.domain.hero.Powerstats
 import javax.inject.Inject
 
-class HeroRepositoryTest @Inject constructor(): IHeroRepository {
+class HeroRepositoryManualTest @Inject constructor(): IHeroRepository {
 
     private fun heroListTest1() : List<DataHero> {
         val hero1 = DataHero(

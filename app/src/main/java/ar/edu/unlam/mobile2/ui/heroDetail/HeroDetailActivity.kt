@@ -65,7 +65,7 @@ class HeroDetailActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     HeroDetailFondo()
-                    HeroDetails(dataHero = viewModel.hero.dataHero)
+                    HeroDetails(dataHero = viewModel.hero)
                 }
             }
         }

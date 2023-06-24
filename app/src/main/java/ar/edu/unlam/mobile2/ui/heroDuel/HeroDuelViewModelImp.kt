@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ar.edu.unlam.mobile2.data.repository.HeroRepositoryTest
 import ar.edu.unlam.mobile2.data.repository.IHeroRepository
 import ar.edu.unlam.mobile2.domain.heroDuel.HeroDuelManager
 import ar.edu.unlam.mobile2.domain.heroDuel.Multiplier
