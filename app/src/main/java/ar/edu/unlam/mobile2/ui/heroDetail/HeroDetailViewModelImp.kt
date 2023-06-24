@@ -13,12 +13,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HeroDetailViewModelImp @Inject constructor(private val repo: IHeroRepository): ViewModel() {
+    /*
     var hero by mutableStateOf(HeroState())
         private set
-
+    */
+    var hero by mutableStateOf(DataHero())
+        private set
 
     fun getHero(id: Int) {
         viewModelScope.launch {
+            /*
             hero = hero.copy(
                 isLoading = true
             )
@@ -26,6 +30,9 @@ class HeroDetailViewModelImp @Inject constructor(private val repo: IHeroReposito
                 dataHero = repo.getHero(id),
                 isLoading = false
             )
+
+             */
+            hero = repo.getHero(id)
         }
     }
 }

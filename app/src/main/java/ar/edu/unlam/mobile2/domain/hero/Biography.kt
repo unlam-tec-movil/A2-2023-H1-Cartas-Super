@@ -15,7 +15,7 @@ import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
 import com.google.gson.annotations.SerializedName
 
 data class Biography(
-    @SerializedName("aliases") val aliases: List<String> = listOf(),
+    @SerializedName("aliases") val aliases: List<String> = listOf("NA"),
     @SerializedName("alignment") val alignment: String = "NA",
     @SerializedName("alterEgos") val alterEgos: String = "NA",
     @SerializedName("firstAppearance") val firstAppearance: String = "NA",
