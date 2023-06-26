@@ -80,7 +80,7 @@ class HeroDetailActivity : ComponentActivity() {
 fun HeroDetailFondo() {
     Image(
         painter = painterResource(id = R.drawable.fondo_coleccion),
-        contentDescription = "Pantalla etalles del héroe",
+        contentDescription = "Pantalla detalles del héroe",
         contentScale = ContentScale.FillHeight,
         modifier = Modifier.fillMaxSize()
     )
@@ -109,17 +109,7 @@ fun HeroDetails(
             .fillMaxWidth(),
             url = dataHero.image.url
         )
-        /*
-        Image(
-            painter = painterResource(id = R.drawable.default_imagen_heroe),
-            contentDescription = "Imagen heroe",
-            modifier = modifier
-                .padding(8.dp)
-                .align(Alignment.CenterHorizontally)
-                .fillMaxWidth()
-        )
 
-         */
         Row(
             modifier = modifier.align(Alignment.CenterHorizontally)
         ) {

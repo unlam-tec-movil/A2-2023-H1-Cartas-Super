@@ -31,11 +31,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -106,6 +109,7 @@ fun PopupResult(isCorrectAnswer:Boolean = false, show:Boolean = false) {
 
 @Composable
 fun QuizUILiveData(modifier:Modifier = Modifier,viewModel:QuizViewModel) {
+    val offset = Offset(6.0f, 4.0f)
     val isLoading by viewModel.isLoadingLD.observeAsState(initial = true)
     val imageUrl by viewModel.heroPortraitUrlD.observeAsState()
     val option1Text by viewModel.option1LD.observeAsState(initial = "option1")
@@ -126,8 +130,16 @@ fun QuizUILiveData(modifier:Modifier = Modifier,viewModel:QuizViewModel) {
                 text = "¿Quien es este heroe?",
                 color = Color.White,
                 fontFamily = shaka_pow,
-                fontSize = 40.sp,
-                modifier = Modifier.padding(horizontal = 8.dp)
+                fontSize = 30.sp,
+                modifier = Modifier.padding(18.dp),
+                style = TextStyle(
+                    fontSize = 18.sp,
+                    shadow = Shadow(
+                        color = Color.Black,
+                        offset = offset,
+                        blurRadius = 4f
+                    )
+                )
             )
             HeroImage(
                 modifier = Modifier
@@ -169,7 +181,7 @@ fun QuizUI(modifier:Modifier = Modifier,viewModel:QuizViewModel){
                 text = "¿Quien es este heroe?",
                 color = Color.White,
                 fontFamily = shaka_pow,
-                fontSize = 40.sp,
+                fontSize = 24.sp,
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
             HeroImage(
