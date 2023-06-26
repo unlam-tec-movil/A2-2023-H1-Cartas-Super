@@ -109,17 +109,7 @@ fun HeroDetails(
             .fillMaxWidth(),
             url = dataHero.image.url
         )
-        /*
-        Image(
-            painter = painterResource(id = R.drawable.default_imagen_heroe),
-            contentDescription = "Imagen heroe",
-            modifier = modifier
-                .padding(8.dp)
-                .align(Alignment.CenterHorizontally)
-                .fillMaxWidth()
-        )
 
-         */
         Row(
             modifier = modifier.align(Alignment.CenterHorizontally)
         ) {

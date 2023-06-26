@@ -125,7 +125,7 @@ fun HeroDuelUI(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
             style = TextStyle(
                 fontSize = 24.sp,
                 shadow = Shadow(
-                    color = Color.Black,
+                    color = Color.White,
                     offset = offset,
                     blurRadius = 4f
                 )
@@ -183,13 +183,14 @@ fun DuelResult(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
             modifier = modifier, fontWeight = FontWeight.Bold, text = mensaje, style = TextStyle(
                 fontSize = 17.sp,
                 shadow = Shadow(
-                    color = Color.Black,
+                    color = Color.White,
                     offset = offset,
                     blurRadius = 4f
                 )
             )
         )
         Button(
+            colors = ButtonDefaults.buttonColors(Color.DarkGray),
             modifier = modifier
                 .width(70.dp)
                 .height(160.dp),
@@ -202,7 +203,7 @@ fun DuelResult(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
                 }
             }
         ) {
-            Text(modifier = modifier, textAlign = TextAlign.Center, text = "Continuar")
+            Text(modifier = modifier, color = Color.White, textAlign = TextAlign.Center, text = "Continuar")
         }
     }
 
@@ -219,7 +220,7 @@ fun ActionMenu(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
         SelectStat(viewModel = viewModel)
         SelectMultiplier(viewModel = viewModel)
         Button(
-            colors = ButtonDefaults.buttonColors(Color.Red),
+            colors = ButtonDefaults.buttonColors(Color.DarkGray),
             shape = ButtonDefaults.outlinedShape,
             onClick = {
                 viewModel.showActionMenu(false)
@@ -227,8 +228,8 @@ fun ActionMenu(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
             }
         ) {
             Text(
-                text = "¡Pelear!", fontWeight = FontWeight.Bold, style = TextStyle(
-                    fontSize = 18.sp
+                text = "¡Pelear!",color = Color.White, fontWeight = FontWeight.Bold, style = TextStyle(
+                    fontSize = 16.sp
                 )
             )
         }
@@ -246,7 +247,7 @@ fun SelectMultiplier(modifier: Modifier = Modifier, viewModel: HeroDuelViewModel
             modifier = modifier, text = "Multi x2:", style = TextStyle(
                 fontSize = 18.sp,
                 shadow = Shadow(
-                    color = Color.Black,
+                    color = Color.White,
                     offset = offset,
                     blurRadius = 4f
                 )
@@ -327,12 +328,13 @@ fun SelectCard(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Button(
+                colors = ButtonDefaults.buttonColors(Color.DarkGray),
                 modifier = modifier,
                 onClick = {
                     viewModel.showSelectCardMenu(false)
                 }
             ) {
-                Text(modifier = modifier, text = "Jugar Carta")
+                Text(modifier = modifier,color = Color.White, text = "Jugar Carta")
             }
             HeroCard(modifier = modifier, hero = dataHero)
             PlayerDeck(modifier = modifier, viewModel = viewModel)
@@ -392,15 +394,7 @@ fun HeroCard(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
             modifier = modifier.padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            /*Image(
-                modifier = modifier
-                    .clip(RoundedCornerShape(40.dp))
-                    .padding(2.dp),
-                painter = painterResource(R.drawable.default_imagen_heroe),
-                contentDescription = "${hero.name} portrait",
-                contentScale = ContentScale.Crop,
 
-            )*/
             Box(modifier = modifier.size(190.dp)) {
                 HeroImage(
                     url = hero.image.url
@@ -435,15 +429,7 @@ fun HeroItem(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
                 .padding(2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            /*Image(
-                modifier = modifier
-                    .size(125.dp)
-                    .clip(RoundedCornerShape(40.dp))
-                    .padding(2.dp),
-                painter = painterResource(R.drawable.default_imagen_heroe),
-                contentDescription = "${hero.name} portrait",
-                contentScale = ContentScale.Crop
-            )*/
+
             Box(
                 modifier = modifier
                     .size(120.dp)
