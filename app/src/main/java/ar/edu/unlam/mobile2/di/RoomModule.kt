@@ -19,7 +19,11 @@ object RoomModule {
     @Singleton
     @Provides
     fun provideRoom(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, HeroDataBase::class.java, HERO_DATABASE_NAME).build()
+        Room.databaseBuilder(
+            context = context,
+            klass = HeroDataBase::class.java,
+            name = HERO_DATABASE_NAME
+        ).build()
 
     @Singleton
     @Provides

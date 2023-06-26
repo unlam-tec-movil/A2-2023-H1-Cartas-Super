@@ -66,7 +66,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.unlam.mobile2.R
-import ar.edu.unlam.mobile2.data.repository.HeroRepositoryTest
 import ar.edu.unlam.mobile2.domain.hero.DataHero
 import ar.edu.unlam.mobile2.domain.hero.HeroImage
 import ar.edu.unlam.mobile2.domain.hero.Powerstats

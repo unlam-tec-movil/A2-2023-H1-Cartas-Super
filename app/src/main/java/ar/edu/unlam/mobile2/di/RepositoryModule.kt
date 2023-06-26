@@ -3,7 +3,7 @@ package ar.edu.unlam.mobile2.di
 import ar.edu.unlam.mobile2.data.database.dao.HeroDao
 import ar.edu.unlam.mobile2.data.network.HeroService
 import ar.edu.unlam.mobile2.data.repository.HeroRepository
-import ar.edu.unlam.mobile2.data.repository.HeroRepositoryTest
+import ar.edu.unlam.mobile2.data.repository.HeroRepositoryManualTest
 import ar.edu.unlam.mobile2.data.repository.IHeroRepository
 import dagger.Module
 import dagger.Provides
