@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mobile2_Scaffolding</string>
+    <string name="app_name">Comic War</string>
     <string name="action_settings">Preferencias</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Primer Fragment</string>
@@ -11,4 +11,10 @@
     <string name="hello_second_fragment">Saludo segundo fragment. Arg: %1$s</string>
 
     <string name="cat_image">Imagen Gatito</string>
+    <string name="title_activity_prueba">Prueba</string>
+    <string name="title_activity_hero_detail">HeroDetailActivity</string>
+    <string name="title_activity_collection">CollectionActivity</string>
+    <string name="title_activity_quiz">Quiz</string>
+    <string name="title_activity_new_game">NewGameActivity</string>
+    <string name="title_activity_hero_fight">HeroFightActivity</string>
 </resources>

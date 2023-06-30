@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".HiltApplication"
         android:allowBackup="true"
@@ -12,6 +15,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mobile2_Scaffolding"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.quiz.QuizActivity"
+            android:exported="false"
+            android:label="@string/title_activity_quiz"
+            android:theme="@style/Theme.Mobile2_Scaffolding" />
+        <activity
+            android:name=".ui.heroDuel.HeroDuelActivity"
+            android:exported="false"
+            android:label="@string/title_activity_hero_fight"
+            android:theme="@style/Theme.Mobile2_Scaffolding" />
+        <activity
+            android:name=".ui.NewGameActivity"
+            android:exported="false"
+            android:label="@string/title_activity_new_game"
+            android:theme="@style/Theme.Mobile2_Scaffolding" />
+        <activity
+            android:name=".ui.collection.CollectionActivity"
+            android:exported="false"
+            android:label="@string/title_activity_collection"
+            android:theme="@style/Theme.Mobile2_Scaffolding" />
+        <activity
+            android:name=".ui.heroDetail.HeroDetailActivity"
+            android:exported="false"
+            android:label="@string/title_activity_hero_detail"
+            android:theme="@style/Theme.Mobile2_Scaffolding" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
@@ -24,8 +52,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>
