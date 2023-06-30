@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui.heroDuel
+package ar.edu.unlam.mobile2.ui.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,6 +10,7 @@ import ar.edu.unlam.mobile2.domain.heroDuel.HeroDuelManager
 import ar.edu.unlam.mobile2.domain.heroDuel.Multiplier
 import ar.edu.unlam.mobile2.domain.heroDuel.Stat
 import ar.edu.unlam.mobile2.domain.heroDuel.Winner
+import ar.edu.unlam.mobile2.ui.utilities.DeckState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

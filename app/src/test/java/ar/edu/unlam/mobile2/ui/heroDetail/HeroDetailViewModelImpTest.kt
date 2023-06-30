@@ -6,6 +6,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import ar.edu.unlam.mobile2.data.repository.IHeroRepository
 import ar.edu.unlam.mobile2.domain.hero.DataHero
 import ar.edu.unlam.mobile2.ui.MainDispatcherRule
+import ar.edu.unlam.mobile2.ui.viewmodel.HeroDetailViewModelImp
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
@@ -47,7 +48,7 @@ class HeroDetailViewModelImpTest {
     @RelaxedMockK
     lateinit var repo:IHeroRepository
 
-    lateinit var viewModel:HeroDetailViewModelImp
+    lateinit var viewModel: HeroDetailViewModelImp
 
     @Before
     fun setUp() {
