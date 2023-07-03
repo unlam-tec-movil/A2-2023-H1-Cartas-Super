@@ -11,6 +11,7 @@ import ar.edu.unlam.mobile2.data.repository.IHeroRepository
 import ar.edu.unlam.mobile2.domain.quiz.QuizGame
 import ar.edu.unlam.mobile2.domain.quiz.QuizOption
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -62,7 +63,7 @@ class QuizViewModel @Inject constructor(repo:IHeroRepository) : ViewModel() {
         private set
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _isLoadingLD.value = true
             isLoading = true
             game = QuizGame(repo.getRandomPlayerDeck(4))
