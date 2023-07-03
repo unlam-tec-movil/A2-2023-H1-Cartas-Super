@@ -54,7 +54,7 @@ class CardGame(
 
     private fun playerCardWon(playerCardStat: Int, adversaryCardStat: Int) {
         _lastCardFightWinner.value = Winner.PLAYER
-        _playerScore.value = playerCardStat - adversaryCardStat
+        _playerScore.value += playerCardStat - adversaryCardStat
         currentAdversaryDeck.remove(_currentAdversaryCard.value)
         if (currentAdversaryDeck.isEmpty()) {
             calculateWinner()
@@ -78,7 +78,7 @@ class CardGame(
         adversaryCardStat: Int
     ) {
         _lastCardFightWinner.value = Winner.ADVERSARY
-        _adversaryScore.value = adversaryCardStat - playerCardStat
+        _adversaryScore.value += adversaryCardStat - playerCardStat
         _currentPlayerDeck.value = _currentPlayerDeck.value.filter { it.id.toInt() != playerCardId}
         if (_currentPlayerDeck.value.isEmpty()) {
             calculateWinner()
