@@ -39,20 +39,26 @@ class HeroDuelViewModelv2 @Inject constructor(private val repo:GameRepository): 
 
 
     lateinit var winner:StateFlow<Winner>
+        private set
 
     lateinit var canMultix2BeUsed:StateFlow<Boolean>
+        private set
 
     private var useMultix2 = false
 
     private var selectedStat = Stat.POWER
 
     lateinit var playerScore:StateFlow<Int>
+        private set
 
     lateinit var adversaryScore:StateFlow<Int>
+        private set
 
     lateinit var currentPlayerDeck:StateFlow<List<DataHero>>
+        private set
 
     lateinit var currentAdversaryCard: StateFlow<DataHero>
+        private set
 
     private val _isLoading:MutableStateFlow<Boolean> = MutableStateFlow(true)
     val isLoading:StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -61,10 +67,14 @@ class HeroDuelViewModelv2 @Inject constructor(private val repo:GameRepository): 
     val showSelectCardScreen = _showSelectCardScreen.asStateFlow()
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
+            game = repo.getNewCardGame()
+
+            /*
             game = withContext(Dispatchers.IO) {
                 repo.getNewCardGame()
             }
+             */
             initStateFlows()
             _isLoading.value = false
         }
