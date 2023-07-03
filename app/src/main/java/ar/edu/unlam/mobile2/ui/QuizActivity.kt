@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui.quiz
+package ar.edu.unlam.mobile2.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -30,10 +30,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -44,12 +42,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
-import androidx.lifecycle.Observer
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.HeroImage
-import ar.edu.unlam.mobile2.ui.MainActivity
 import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
+import ar.edu.unlam.mobile2.ui.viewmodel.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -108,7 +105,7 @@ fun PopupResult(isCorrectAnswer:Boolean = false, show:Boolean = false) {
 }
 
 @Composable
-fun QuizUILiveData(modifier:Modifier = Modifier,viewModel:QuizViewModel) {
+fun QuizUILiveData(modifier:Modifier = Modifier,viewModel: QuizViewModel) {
     val offset = Offset(6.0f, 4.0f)
     val isLoading by viewModel.isLoadingLD.observeAsState(initial = true)
     val imageUrl by viewModel.heroPortraitUrlD.observeAsState()
@@ -166,7 +163,7 @@ fun QuizUILiveData(modifier:Modifier = Modifier,viewModel:QuizViewModel) {
 }
 
 @Composable
-fun QuizUI(modifier:Modifier = Modifier,viewModel:QuizViewModel){
+fun QuizUI(modifier:Modifier = Modifier,viewModel: QuizViewModel){
     if(viewModel.isLoading) {
         Box(modifier = modifier.fillMaxSize()) {
             CircularProgressIndicator(modifier = modifier.align(Alignment.Center))

@@ -1,26 +1,16 @@
-package ar.edu.unlam.mobile2.ui
+package ar.edu.unlam.mobile2.ui.viewmodel
 
-import android.content.Context
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ar.edu.unlam.mobile2.HttpClientModule
-import ar.edu.unlam.mobile2.domain.GetNewKitty
-import coil.ImageLoader
-import coil.request.ImageRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import java.security.cert.X509Certificate
 import javax.inject.Inject
-import javax.net.ssl.SSLContext
-import javax.net.ssl.TrustManager
-import javax.net.ssl.X509TrustManager
 
 @HiltViewModel
-class MainViewModel @Inject constructor(val service: GetNewKitty) : ViewModel() {
+class MainViewModel @Inject constructor() : ViewModel() {
 
+}
+
+/*
     final var DEFAULT: String = "https://www.superherodb.com/pictures2/portraits/10/100/10060.jpg"
     //final var DEFAULT: String = "https://icons.iconarchive.com/icons/iconsmind/outline/512/Cat-icon.png"
 
@@ -91,4 +81,5 @@ class MainViewModel @Inject constructor(val service: GetNewKitty) : ViewModel() 
             .build()*/
         return module.imageLoader(context)
     }
-}
+
+ */

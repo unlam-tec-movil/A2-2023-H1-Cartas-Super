@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui.heroDetail
+package ar.edu.unlam.mobile2.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -31,11 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.unlam.mobile2.R
-import ar.edu.unlam.mobile2.domain.hero.Appearance
-import ar.edu.unlam.mobile2.domain.hero.Biography
-import ar.edu.unlam.mobile2.domain.hero.Connections
 import ar.edu.unlam.mobile2.domain.hero.DataHero
 import ar.edu.unlam.mobile2.domain.hero.HeroAppearance
 import ar.edu.unlam.mobile2.domain.hero.HeroBiography
@@ -43,10 +39,9 @@ import ar.edu.unlam.mobile2.domain.hero.HeroConnections
 import ar.edu.unlam.mobile2.domain.hero.HeroImage
 import ar.edu.unlam.mobile2.domain.hero.HeroStats
 import ar.edu.unlam.mobile2.domain.hero.HeroWork
-import ar.edu.unlam.mobile2.domain.hero.Powerstats
-import ar.edu.unlam.mobile2.domain.hero.Work
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
+import ar.edu.unlam.mobile2.ui.viewmodel.HeroDetailViewModelImp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

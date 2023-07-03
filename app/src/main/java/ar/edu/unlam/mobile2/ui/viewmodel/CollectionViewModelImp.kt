@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui.heroDetail
+package ar.edu.unlam.mobile2.ui.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -6,33 +6,26 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile2.data.repository.IHeroRepository
-import ar.edu.unlam.mobile2.domain.hero.DataHero
+import ar.edu.unlam.mobile2.ui.utilities.HeroListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HeroDetailViewModelImp @Inject constructor(private val repo: IHeroRepository): ViewModel() {
-    /*
-    var hero by mutableStateOf(HeroState())
-        private set
-    */
-    var hero by mutableStateOf(DataHero())
+class CollectionViewModelImp @Inject constructor(private val repo: IHeroRepository):ViewModel() {
+    var heroList by mutableStateOf(HeroListState())
         private set
 
-    fun getHero(id: Int) {
+    init {
         viewModelScope.launch {
-            /*
-            hero = hero.copy(
+            heroList = heroList.copy(
                 isLoading = true
             )
-            hero = hero.copy(
-                dataHero = repo.getHero(id),
+            heroList = heroList.copy(
+                heroList = repo.getAllHero(),
                 isLoading = false
             )
-
-             */
-            hero = repo.getHero(id)
         }
     }
+
 }

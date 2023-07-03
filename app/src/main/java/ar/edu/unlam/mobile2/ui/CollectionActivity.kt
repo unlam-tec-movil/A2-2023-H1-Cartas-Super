@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui.collection
+package ar.edu.unlam.mobile2.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -37,8 +37,9 @@ import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.DataHero
 import ar.edu.unlam.mobile2.domain.hero.HeroImage
-import ar.edu.unlam.mobile2.ui.heroDetail.HeroDetailActivity
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
+import ar.edu.unlam.mobile2.ui.utilities.HeroListState
+import ar.edu.unlam.mobile2.ui.viewmodel.CollectionViewModelImp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -64,7 +65,7 @@ class CollectionActivity : ComponentActivity() {
 
 @Preview
 @Composable
-fun PantallaCollection(modifier:Modifier = Modifier, heroListState:HeroListState = HeroListState()) {
+fun PantallaCollection(modifier:Modifier = Modifier, heroListState: HeroListState = HeroListState()) {
     Box{
         Image(
             painter = painterResource(id = R.drawable.fondo_coleccion),

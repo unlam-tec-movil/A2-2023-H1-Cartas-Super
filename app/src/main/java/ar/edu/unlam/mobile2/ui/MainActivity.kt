@@ -25,47 +25,32 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Observer
-import androidx.navigation.ui.AppBarConfiguration
 import ar.edu.unlam.mobile2.R
-import ar.edu.unlam.mobile2.databinding.ActivityMainBinding
-import ar.edu.unlam.mobile2.ui.collection.CollectionActivity
-import ar.edu.unlam.mobile2.ui.heroDuel.HeroDuelActivity
-import ar.edu.unlam.mobile2.ui.quiz.QuizActivity
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
+import ar.edu.unlam.mobile2.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
+class MainActivity : ComponentActivity() {
 
     private val mainViewModel: MainViewModel by viewModels()
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("MainActivity", "onCreate")
+        //Log.i("MainActivity", "onCreate") dejo comentado esto para tener un ejemplo de logeo de datos
 
-        mainViewModel.kittyUrl.observe(
-            this,
-            Observer<String> { _ ->
-                run {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        Log.i("MainActivity", "Observer")
-                        setContent {
-                            PantallaFondo()
-                            ContenidoPantalla()
-                            //content(name = "Mundo")
-                        }
-                    }
+        run {
+            CoroutineScope(Dispatchers.Main).launch {
+                setContent {
+                    PantallaFondo()
+                    ContenidoPantalla()
                 }
-            },
-        )
+            }
+        }
     }
 
     override fun onStart() {
@@ -73,91 +58,83 @@ class MainActivity : /*AppCompatActivity()*/ ComponentActivity() {
         Log.i("MainActivity", "onStart")
     }
 
-    @Composable
-    fun PantallaFondo() {
-        Image(
-            painter = painterResource(id = R.drawable.pantalla_principal),
-            contentDescription = "Pantalla Coleccion",
-            contentScale = ContentScale.FillWidth,
-            modifier = Modifier.fillMaxSize()
-        )
-    }
+}
+
+@Composable
+fun PantallaFondo() {
+    Image(
+        painter = painterResource(id = R.drawable.pantalla_principal),
+        contentDescription = "Pantalla Coleccion",
+        contentScale = ContentScale.FillWidth,
+        modifier = Modifier.fillMaxSize()
+    )
+}
 
 
-    @Composable
-    fun ContenidoPantalla() {
+@Composable
+fun ContenidoPantalla() {
 
-        val context = LocalContext.current
+    val context = LocalContext.current
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 70.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 70.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Bottom
+    ) {
+
+        Button(
+            onClick = {
+                context.startActivity(Intent(context, HeroDuelActivity::class.java))
+            },
+            modifier = Modifier.wrapContentSize().padding(16.dp),
+            colors = ButtonDefaults.buttonColors(Color.Yellow)
         ) {
-
-            Button(
-                onClick = {
-                    context.startActivity(Intent(context, HeroDuelActivity::class.java))
-                },
-                modifier = Modifier.wrapContentSize().padding(16.dp),
-                colors = ButtonDefaults.buttonColors(Color.Yellow)
-            ) {
-                Text(
-                    "START", fontSize = 20.sp,
-                    color = Color.Black,
-                    fontFamily = shaka_pow
-                )
-            }
-
-            Button(
-                onClick = {
-                    context.startActivity(Intent(context, CollectionActivity::class.java))
-                },
-                modifier = Modifier.wrapContentSize().padding(16.dp),
-                colors = ButtonDefaults.buttonColors(Color.Yellow)
-            ) {
-                Text(
-                    "Coleccion", fontSize = 20.sp,
-                    color = Color.Black,
-                    fontFamily = shaka_pow
-                )
-            }
-
-            Button(
-                onClick = {
-                    context.startActivity(Intent(context, QuizActivity::class.java))
-                },
-                colors = ButtonDefaults.buttonColors(Color.Yellow)
-            ) {
-                Text(
-                    "Pregunta diaria", fontSize = 20.sp,
-                    color = Color.Black,
-                    fontFamily = shaka_pow
-                )
-            }
-            /*Button(
-                onClick = {
-                    context.startActivity(Intent(context, HeroDuelActivity::class.java))
-                },
-            ) {
-                Text(text = "ir pantalla HeroDuel")
-            }*/
-
+            Text(
+                "START", fontSize = 20.sp,
+                color = Color.Black,
+                fontFamily = shaka_pow
+            )
         }
-    }
 
-    @Preview(showBackground = true)
-    @Composable
-    fun ScreenPreview() {
-        Mobile2_ScaffoldingTheme {
-            PantallaFondo()
-            ContenidoPantalla()
+        Button(
+            onClick = {
+                context.startActivity(Intent(context, CollectionActivity::class.java))
+            },
+            modifier = Modifier.wrapContentSize().padding(16.dp),
+            colors = ButtonDefaults.buttonColors(Color.Yellow)
+        ) {
+            Text(
+                "Coleccion", fontSize = 20.sp,
+                color = Color.Black,
+                fontFamily = shaka_pow
+            )
+        }
+
+        Button(
+            onClick = {
+                context.startActivity(Intent(context, QuizActivity::class.java))
+            },
+            colors = ButtonDefaults.buttonColors(Color.Yellow)
+        ) {
+            Text(
+                "Pregunta diaria", fontSize = 20.sp,
+                color = Color.Black,
+                fontFamily = shaka_pow
+            )
         }
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun ScreenPreview() {
+    Mobile2_ScaffoldingTheme {
+        PantallaFondo()
+        ContenidoPantalla()
+    }
+}
 
 // @Composable
 // fun content(name: String) {
