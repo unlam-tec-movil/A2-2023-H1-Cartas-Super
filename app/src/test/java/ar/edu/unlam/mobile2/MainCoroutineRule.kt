@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui
+package ar.edu.unlam.mobile2
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

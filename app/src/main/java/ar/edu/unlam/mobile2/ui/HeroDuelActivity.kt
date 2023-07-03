@@ -1,11 +1,15 @@
 package ar.edu.unlam.mobile2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,14 +17,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenuItem
@@ -43,6 +46,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -50,40 +54,104 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.DataHero
-import ar.edu.unlam.mobile2.domain.hero.HeroImage
-import ar.edu.unlam.mobile2.domain.hero.Powerstats
+import ar.edu.unlam.mobile2.domain.hero.HeroCard
+import ar.edu.unlam.mobile2.domain.hero.HeroItem
+import ar.edu.unlam.mobile2.domain.hero.HeroPlayerCard
+import ar.edu.unlam.mobile2.domain.heroDuel.Stat
 import ar.edu.unlam.mobile2.domain.heroDuel.Winner
-import ar.edu.unlam.mobile2.ui.viewmodel.HeroDuelViewModelImp
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
+import ar.edu.unlam.mobile2.ui.viewmodel.HeroDuelViewModelv2
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HeroDuelActivity : ComponentActivity() {
-    val viewModel by viewModels<HeroDuelViewModelImp>()
+
+    private val viewModel by viewModels<HeroDuelViewModelv2>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Mobile2_ScaffoldingTheme {
-                // A surface container using the 'background' color from the theme
+            Mobile2_ScaffoldingTheme(
+                darkTheme = isSystemInDarkTheme() /* es un boolean*/,
+                dynamicColor = true /*cambiar de ser necesario*/
+            ) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HeroDuelFondo()
-                    HeroDuelUI(
-                        modifier = Modifier,
-                        viewModel = viewModel
-                    )
+                    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle(initialValue = true)
+                    if(isLoading) {
+                        CircularProgressIndicator(modifier = Modifier.fillMaxSize())
+                    }else {
+                        val showSelectCardScreen by viewModel.showSelectCardScreen.collectAsStateWithLifecycle(
+                            initialValue = false
+                        )
+                        val showHeroDuelScreen by viewModel.showHeroDuelScreen.collectAsStateWithLifecycle(
+                            initialValue = false
+                        )
+                        val showWinnerScreen by viewModel.showWinnerScreen.collectAsStateWithLifecycle(
+                            initialValue = false
+                        )
+                        val playerDeck by viewModel.currentPlayerDeck.collectAsStateWithLifecycle(
+                            initialValue = listOf(DataHero())
+                        )
+                        val cardSelectedIndex by viewModel.cardSelectedIndex.collectAsStateWithLifecycle(
+                            initialValue = 0
+                        )
+                        val onPlayCardClick = viewModel::onPlayCardClick
+                        val onPlayerCardClick = viewModel::onPlayerCardClick
+                        val currentPlayerCard by viewModel.currentPlayerCard.collectAsStateWithLifecycle(
+                            initialValue = DataHero()
+                        )
+                        val currentAdversaryCard by viewModel.currentAdversaryCard.collectAsStateWithLifecycle(
+                            initialValue = DataHero()
+                        )
+                        val playerScore by viewModel.playerScore.collectAsStateWithLifecycle(
+                            initialValue = 0
+                        )
+                        val adversaryScore by viewModel.adversaryScore.collectAsStateWithLifecycle(
+                            initialValue = 0
+                        )
+                        val onClickSelectedStat = viewModel::onClickSelectedStat
+                        val useMultiplierX2 = viewModel::useMultiplierX2
+                        val onFightClick = viewModel::onFightClick
+                        val winner by viewModel.winner.collectAsStateWithLifecycle(initialValue = Winner.NONE)
+                        val canMultix2BeUsed by viewModel.canMultix2BeUsed.collectAsStateWithLifecycle(
+                            initialValue = true
+                        )
+
+                        HeroDuelFondo()
+                        HeroDuelUi(
+                            showSelectCardScreen = showSelectCardScreen,
+                            showHeroDuelScreen = showHeroDuelScreen,
+                            showWinnerScreen = showWinnerScreen,
+                            playerDeck = playerDeck,
+                            cardSelectedIndex = cardSelectedIndex,
+                            onPlayCardClick = onPlayCardClick,
+                            onPlayerCardClick = onPlayerCardClick,
+                            currentPlayerCard = currentPlayerCard,
+                            currentAdversaryCard = currentAdversaryCard,
+                            playerScore = playerScore,
+                            adversaryScore = adversaryScore,
+                            onClickSelectedStat = onClickSelectedStat,
+                            canMultix2BeUsed = canMultix2BeUsed,
+                            useMultiplierX2 = useMultiplierX2,
+                            onFightClick = onFightClick,
+                            winner = winner
+                        )
+                    }
                 }
+
             }
         }
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 fun HeroDuelFondo() {
     Image(
@@ -94,15 +162,19 @@ fun HeroDuelFondo() {
     )
 }
 
+@Preview(showBackground = true)
 @Composable
-fun HeroDuelUI(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
+fun WinnerScreen(modifier: Modifier = Modifier, winner:Winner = Winner.NONE, playerScore:Int = 0,adversaryScore:Int = 0) {
     val offset = Offset(6.0f, 4.0f)
-    if (viewModel.showGameWinner) {
+
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
-            text = "El ganador es " + if (viewModel.gameWinner == Winner.PLAYER) "el jugador" else "el adversario",
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(16.dp, 300.dp),
+            text = "El ganador es " + if (winner == Winner.PLAYER) "el jugador" else "el adversario",
+            modifier = Modifier.padding(16.dp),
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             fontFamily = shaka_pow,
@@ -114,105 +186,201 @@ fun HeroDuelUI(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
                     blurRadius = 4f
                 )
             )
-
         )
-    } else {
-        if (viewModel.showSelectCardMenu) {
-            SelectCard(modifier = modifier, viewModel = viewModel)
-        } else {
-            viewModel.showActionMenu(true)
-            HeroDuel(modifier = modifier, viewModel = viewModel)
-        }
-    }
-
-}
-
-@Composable
-fun HeroDuel(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
-    val playerCard = viewModel.playerDeckState.deck[viewModel.playerDeckState.selectedCardIndex]
-    val adversaryCard =
-        viewModel.adversaryDeckState.deck[viewModel.adversaryDeckState.selectedCardIndex]
-
-    Column(modifier = modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-
-        HeroCard(modifier = modifier, hero = adversaryCard)
-
-        if (viewModel.showActionMenu) {
-            ActionMenu(modifier = modifier.weight(2.3f), viewModel = viewModel)
-        } else {
-            DuelResult(modifier = modifier.weight(2.3f), viewModel = viewModel)
-        }
-        HeroCard(modifier = modifier, hero = playerCard)
-
-    }
-}
-
-@Composable
-fun DuelResult(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
-    val offset = Offset(6.0f, 4.0f)
-    val playerWon = viewModel.heroDuelWinner == Winner.PLAYER
-    val mensaje = if (playerWon) {
-        //"¡Ganaste esta pelea y conservarás tu carta!"
-        "Ganaste esta pelea"
-    } else {
-        "Perdiste esta pelea"
-        //"Perdiste esta pelea y se envió tu carta al cementerio."
-    }
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp, 0.dp, 16.dp, 0.dp)
-    ) {
-        Text(
-            modifier = modifier, fontWeight = FontWeight.Bold, text = mensaje, style = TextStyle(
-                fontSize = 17.sp,
-                shadow = Shadow(
-                    color = Color.White,
-                    offset = offset,
-                    blurRadius = 4f
-                )
-            )
+        GameScore(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            playerScore = playerScore,
+            adversaryScore = adversaryScore
         )
-        Button(
-            colors = ButtonDefaults.buttonColors(Color.DarkGray),
-            modifier = modifier
-                .width(70.dp)
-                .height(160.dp),
-            onClick = {
-                if (playerWon)
-                    viewModel.showActionMenu(true)
-                else {
-                    viewModel.showActionMenu(false)
-                    viewModel.showSelectCardMenu(true)
-                }
-            }
-        ) {
-            Text(modifier = modifier, color = Color.White, textAlign = TextAlign.Center, text = "Continuar")
-        }
     }
 
 }
 
 
 @Composable
-fun ActionMenu(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp, 0.dp, 16.dp, 0.dp), horizontalArrangement = Arrangement.SpaceBetween
+fun HeroDuelUi(
+    showSelectCardScreen: Boolean = false,
+    showHeroDuelScreen: Boolean = false,
+    showWinnerScreen:Boolean = false,
+    playerDeck: List<DataHero> = listOf(DataHero(), DataHero(), DataHero()),
+    cardSelectedIndex:Int = 0,
+    onPlayCardClick:() -> Unit = {},
+    onPlayerCardClick: (Int) -> Unit = {},
+    currentPlayerCard: DataHero = DataHero(),
+    currentAdversaryCard: DataHero = DataHero(),
+    playerScore: Int = 0,
+    adversaryScore: Int = 0,
+    onClickSelectedStat: (Stat) -> Unit = {},
+    canMultix2BeUsed:Boolean = true,
+    useMultiplierX2: (Boolean) -> Unit = {},
+    onFightClick: () -> Unit = {},
+    winner: Winner = Winner.NONE
+) {
+    val modifier = Modifier.fillMaxSize()
+
+    if(showSelectCardScreen) {
+        SelectCard(
+            modifier = modifier,
+            playerDeck = playerDeck,
+            cardSelectedIndex = cardSelectedIndex,
+            onPlayCardClick = onPlayCardClick,
+            onPlayerCardClick = onPlayerCardClick
+        )
+    }
+
+    if(showHeroDuelScreen) {
+        HeroDuel(
+            modifier = modifier,
+            currentPlayerCard = currentPlayerCard,
+            currentAdversaryCard = currentAdversaryCard,
+            playerScore = playerScore,
+            adversaryScore = adversaryScore,
+            onClickSelectedStat = onClickSelectedStat,
+            useMultiplierX2 = useMultiplierX2,
+            onFightClick = onFightClick,
+            canMultix2BeUsed = canMultix2BeUsed
+        )
+    }
+
+    if(showWinnerScreen) {
+        WinnerScreen(
+            modifier = modifier,
+            winner = winner,
+            playerScore = playerScore,
+            adversaryScore = adversaryScore
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HeroDuel(
+    modifier: Modifier = Modifier,
+    currentPlayerCard:DataHero = DataHero(),
+    currentAdversaryCard:DataHero = DataHero(),
+    playerScore:Int = 0,
+    adversaryScore:Int = 0,
+    onClickSelectedStat:(Stat) -> Unit = {},
+    canMultix2BeUsed:Boolean = true,
+    useMultiplierX2:(Boolean) -> Unit = {},
+    onFightClick:() -> Unit = {}
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SelectStat(viewModel = viewModel)
-        SelectMultiplier(viewModel = viewModel)
+        GameScore(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            playerScore = playerScore,
+            adversaryScore = adversaryScore
+        )
+        val cardModifier = Modifier
+            .padding(7.dp)
+            .shadow(8.dp)
+        HeroCard(
+            modifier = cardModifier,
+            hero = currentAdversaryCard
+        )
+        ActionMenu(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(7.dp),
+            onClickSelectedStat = onClickSelectedStat,
+            useMultiplierX2 = useMultiplierX2,
+            onFightClick = onFightClick,
+            canMultix2BeUsed = canMultix2BeUsed
+        )
+        HeroPlayerCard(
+            modifier = cardModifier,
+            hero = currentPlayerCard
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GameScore(
+    modifier: Modifier = Modifier,
+    playerScore:Int = 0,
+    adversaryScore:Int = 0
+) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
+        IndividualScore(
+            modifier = Modifier
+                .border(1.dp,color = Color.Black),
+            score = playerScore,
+            text = "Jugador:",
+            backgroundColor = Color(0xFF16A0E8)
+        )
+        IndividualScore(
+            modifier = Modifier
+                .border(1.dp,color = Color.Black),
+            score = adversaryScore,
+            text = "Adversario:",
+            backgroundColor = Color(0xFFFA1404),
+            textColor = Color.White
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun IndividualScore(
+    modifier:Modifier = Modifier,
+    score:Int = 0,
+    text:String = "Jugador o adversario:",
+    backgroundColor:Color = Color.White,
+    textColor: Color = Color.Black
+) {
+    Text(
+        modifier = modifier
+            .background(color = backgroundColor)
+            .padding(5.dp),
+        text = "$text $score",
+        fontWeight = FontWeight.ExtraBold,
+        color = textColor
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ActionMenu(
+    modifier: Modifier = Modifier,
+    onClickSelectedStat:(Stat) -> Unit = {},
+    canMultix2BeUsed:Boolean = true,
+    useMultiplierX2: (Boolean) -> Unit = {},
+    onFightClick: () -> Unit = {}
+) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        SelectStat(modifier = Modifier.width(155.dp),onClick = onClickSelectedStat)
+        Spacer(modifier = Modifier.size(8.dp))
+        SelectMultiplier(
+            useMultiplierX2 = useMultiplierX2,
+            canMultix2BeUsed = canMultix2BeUsed
+        )
         Button(
             colors = ButtonDefaults.buttonColors(Color.DarkGray),
             shape = ButtonDefaults.outlinedShape,
             onClick = {
-                viewModel.showActionMenu(false)
-                viewModel.startHeroDuelTurn()
+                onFightClick()
             }
         ) {
             Text(
-                text = "¡Pelear!",color = Color.White, fontWeight = FontWeight.Bold, style = TextStyle(
+                text = "¡Pelear!",
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                style = TextStyle(
                     fontSize = 16.sp
                 )
             )
@@ -220,16 +388,27 @@ fun ActionMenu(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
     }
 }
 
+
+
+@Preview(showBackground = true)
 @Composable
-fun SelectMultiplier(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
+fun SelectMultiplier(
+    modifier: Modifier = Modifier,
+    canMultix2BeUsed:Boolean = true,
+    useMultiplierX2:(Boolean) -> Unit = {}
+) {
     val offset = Offset(6.0f, 4.0f)
     var checked by rememberSaveable {
         mutableStateOf(false)
     }
-    Column(modifier = modifier) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Text(
-            modifier = modifier, text = "Multi x2:", style = TextStyle(
-                fontSize = 18.sp,
+            text = "Multi x2:",
+            style = TextStyle(
+                fontSize = 16.sp,
                 shadow = Shadow(
                     color = Color.White,
                     offset = offset,
@@ -238,40 +417,154 @@ fun SelectMultiplier(modifier: Modifier = Modifier, viewModel: HeroDuelViewModel
             )
         )
         Checkbox(
-            checked = checked,
+            checked = if(canMultix2BeUsed) checked else false,
             onCheckedChange = {
                 checked = !checked
-                viewModel.useMultiplierX2(checked)
+                useMultiplierX2(checked)
             }
         )
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun SelectCard(
+    modifier: Modifier = Modifier,
+    playerDeck: List<DataHero> = listOf(
+        DataHero(id = "1", name = "test 1"),
+        DataHero(id = "2", name = "test 2")
+    ),
+    cardSelectedIndex:Int = 0,
+    onPlayCardClick:() -> Unit = {},
+    onPlayerCardClick:(Int) -> Unit = {},
+) {
+    if (playerDeck.isEmpty()) {
+        InCaseOfError("SelectCard composable.")
+    } else {
+        var setDefaults by rememberSaveable {
+            mutableStateOf(true)
+        }
+        if(setDefaults) {
+            onPlayerCardClick(0)
+            setDefaults = false
+        }
+        Column(
+            modifier = modifier,
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            JugarCartaButton(
+                onPlayCardClick = onPlayCardClick
+            )
+            HeroPlayerCard(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .shadow(9.dp),
+                hero = playerDeck[cardSelectedIndex],
+                cardColors = CardDefaults.cardColors(Color(0xFF16A0E8)) //hay que guardar el color en ui.theme.Color.kt
+            )
+            PlayerDeck(
+                modifier = Modifier,
+                playerDeck = playerDeck,
+                onPlayerCardClick = onPlayerCardClick
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun JugarCartaButton(
+    modifier: Modifier = Modifier,
+    onPlayCardClick:() -> Unit = {}
+) {
+    Button(
+        colors = ButtonDefaults.buttonColors(Color.DarkGray),
+        modifier = modifier,
+        onClick = {
+            onPlayCardClick()
+        }
+    ) {
+        Text(modifier = Modifier,color = Color.White, text = "Jugar Carta")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PlayerDeck(
+    modifier: Modifier = Modifier,
+    playerDeck:List<DataHero> = listOf(DataHero(),DataHero(),DataHero()),
+    onPlayerCardClick:(Int) -> Unit = {}
+) {
+    if (playerDeck.isNotEmpty()) {
+        LazyColumn(
+            modifier = modifier,
+            content = {
+                items(playerDeck.size) { i ->
+                    HeroItem(
+                        modifier = Modifier
+                            .clickable {
+                                onPlayerCardClick(i)
+                            }
+                            .padding(8.dp)
+                            .shadow(9.dp),
+                        hero = playerDeck[i]
+                    )
+                }
+            }
+        )
+    }else {
+        InCaseOfError(place = "PlayerDeck composable")
+    }
+}
+
+@Composable
+fun InCaseOfError(place:String = "En algún lugar") {
+    val context = LocalContext.current
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Hubo un error: Mazo vacío $place.")
+        Button(
+            onClick = { context.startActivity(Intent(context, MainActivity::class.java)) }
+        ) {
+            Text(text = "volver al menú principal")
+        }
+    }
+}
+
+@Preview(showBackground = true)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SelectStat(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
-    var expanded by rememberSaveable {
-        mutableStateOf(false)
-    }
-    val statList = viewModel.getStatList()
-    var selectedStat = viewModel.selectedStat
+fun SelectStat(
+    modifier: Modifier = Modifier,
+    statList:List<Stat> = listOf(
+        Stat.POWER,
+        Stat.DURABILITY,
+        Stat.STRENGTH,
+        Stat.SPEED,
+        Stat.COMBAT,
+        Stat.INTELLIGENCE
+    ),
+    onClick:(Stat) -> Unit = {}
+) {
+    var expanded by rememberSaveable { mutableStateOf(false) }
+    var selectedStat by rememberSaveable { mutableStateOf(Stat.POWER) }
 
     Box(
         modifier = modifier
-        //.padding(8.dp)
-        //.width(160.dp)
-        //.height(24.dp)
     ) {
         ExposedDropdownMenuBox(
             expanded = expanded,
-            modifier = modifier.size(170.dp),
             onExpandedChange = {
                 expanded = !expanded
             }
         ) {
             TextField(
                 value = selectedStat.statName,
-                onValueChange = { viewModel.selectedStat(selectedStat) },
+                onValueChange = { onClick(selectedStat) },
                 readOnly = true,
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 modifier = modifier.menuAnchor()
@@ -284,7 +577,8 @@ fun SelectStat(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
                     DropdownMenuItem(
                         text = { Text(text = item.statName) },
                         onClick = {
-                            viewModel.selectedStat(item)
+                            selectedStat = item
+                            onClick(selectedStat)
                             expanded = false
                         }
                     )
@@ -293,190 +587,3 @@ fun SelectStat(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
         }
     }
 }
-
-
-@Composable
-fun SelectCard(modifier: Modifier = Modifier, viewModel: HeroDuelViewModelImp) {
-    val playerDeckIsLoading = viewModel.playerDeckState.isLoading
-    val aIDeckIsLoading = viewModel.adversaryDeckState.isLoading
-    if (playerDeckIsLoading or aIDeckIsLoading) {
-        Box(modifier = modifier.fillMaxSize()) {
-            CircularProgressIndicator(modifier = modifier.align(Alignment.Center))
-        }
-    } else {
-        val heroCardSelected = viewModel.playerDeckState.selectedCardIndex
-        val dataHero: DataHero = viewModel.playerDeckState.deck[heroCardSelected]
-        Column(
-            modifier = modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Button(
-                colors = ButtonDefaults.buttonColors(Color.DarkGray),
-                modifier = modifier,
-                onClick = {
-                    viewModel.showSelectCardMenu(false)
-                }
-            ) {
-                Text(modifier = modifier,color = Color.White, text = "Jugar Carta")
-            }
-            HeroCard(modifier = modifier, hero = dataHero)
-            PlayerDeck(modifier = modifier, viewModel = viewModel)
-
-        }
-    }
-}
-
-
-@Composable
-fun PlayerDeckNVM(
-    modifier: Modifier = Modifier,
-    playerDeck: List<DataHero>
-) {
-    LazyColumn(
-        modifier = modifier,
-        content = {
-            items(playerDeck.size) { i ->
-                HeroItem(
-                    modifier = modifier.clickable { },
-                    hero = playerDeck[i]
-                )
-            }
-        })
-}
-
-@Composable
-fun PlayerDeck(
-    modifier: Modifier = Modifier,
-    viewModel: HeroDuelViewModelImp
-) {
-    val playerDeck = viewModel.playerDeckState.deck
-    LazyColumn(
-        modifier = modifier,
-        content = {
-            items(playerDeck.size) { i ->
-                HeroItem(
-                    modifier = modifier.clickable {
-                        viewModel.selectedPlayerCard(i)
-                    },
-                    hero = playerDeck[i]
-                )
-            }
-        })
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HeroCard(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
-
-    Card(
-        modifier = modifier
-            .padding(16.dp)
-            .shadow(5.dp)
-    ) {
-        Column(
-            modifier = modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
-            Box(modifier = modifier.size(190.dp)) {
-                HeroImage(
-                    url = hero.image.url
-                )
-            }
-            Text(
-                modifier = modifier.padding(2.dp),
-                text = hero.name
-            )
-            HeroStats(
-                modifier = modifier
-                    .padding(2.dp),
-                heroStats = hero.powerstats
-            )
-        }
-
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HeroItem(modifier: Modifier = Modifier, hero: DataHero = DataHero()) {
-    Card(
-        modifier = modifier
-            .padding(16.dp, 8.dp, 16.dp, 8.dp)
-            .shadow(8.dp)
-    ) {
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(2.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            Box(
-                modifier = modifier
-                    .size(120.dp)
-                    .padding(4.dp)
-            ) {
-                HeroImage(
-                    url = hero.image.url
-                )
-
-            }
-            Spacer(
-                modifier = modifier.padding(8.dp)
-            )
-            Text(
-                modifier = modifier.padding(2.dp),
-                text = hero.name
-            )
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HeroStats(modifier: Modifier = Modifier, heroStats: Powerstats = Powerstats()) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Column(modifier = modifier) {
-            Text(
-                modifier = modifier,
-                text = "Combate: ${heroStats.combat}",
-                fontSize = 13.sp
-            )
-            Text(
-                modifier = modifier,
-                text = "Durabilidad: ${heroStats.durability}",
-                fontSize = 13.sp
-            )
-            Text(
-                modifier = modifier,
-                text = "Poder: ${heroStats.power}",
-                fontSize = 13.sp
-            )
-        }
-        Column(modifier = modifier) {
-            Text(
-                modifier = modifier,
-                text = "Velocidad: ${heroStats.speed}",
-                fontSize = 13.sp
-            )
-            Text(
-                modifier = modifier,
-                text = "Fuerza: ${heroStats.strength}",
-                fontSize = 13.sp
-            )
-            Text(
-                modifier = modifier,
-                text = "Inteligencia: ${heroStats.intelligence}",
-                fontSize = 13.sp
-            )
-        }
-    }
-}
-
-

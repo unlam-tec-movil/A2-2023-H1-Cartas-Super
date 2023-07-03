@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,12 +28,18 @@ data class Powerstats(
 
 @Preview(showBackground = true)
 @Composable
-fun HeroStats(modifier: Modifier = Modifier, stats: Powerstats = Powerstats()) {
+fun HeroStats(
+    modifier: Modifier = Modifier,
+    stats: Powerstats = Powerstats(),
+    brush: Brush = SolidColor(Color.Black),
+    alpha:Float = 0.8f,
+    textColor:Color = Color.White
+) {
     Row(
         modifier = modifier
             .background(
-                brush = SolidColor(Color.Black),
-                alpha = 0.8f
+                brush = brush,
+                alpha = alpha
             ),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
@@ -40,16 +47,16 @@ fun HeroStats(modifier: Modifier = Modifier, stats: Powerstats = Powerstats()) {
             modifier = Modifier
                 .padding(8.dp)
         ) {
-            StatComposable(statName = "Inteligencia", statValue = stats.intelligence)
-            StatComposable(statName = "Velocidad", statValue = stats.speed)
-            StatComposable(statName = "Durabilidad", statValue = stats.durability)
+            StatComposable(statName = "Inteligencia", statValue = stats.intelligence, color = textColor)
+            StatComposable(statName = "Velocidad", statValue = stats.speed, color = textColor)
+            StatComposable(statName = "Durabilidad", statValue = stats.durability, color = textColor)
         }
         Column(
-            modifier = modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp)
         ) {
-            StatComposable(statName = "Fuerza", statValue = stats.strength)
-            StatComposable(statName = "Poder", statValue = stats.power)
-            StatComposable(statName = "Combate", statValue = stats.combat)
+            StatComposable(statName = "Fuerza", statValue = stats.strength, color = textColor)
+            StatComposable(statName = "Poder", statValue = stats.power, color = textColor)
+            StatComposable(statName = "Combate", statValue = stats.combat, color = textColor)
         }
     }
 }
@@ -58,12 +65,13 @@ fun HeroStats(modifier: Modifier = Modifier, stats: Powerstats = Powerstats()) {
 fun StatComposable(
     modifier:Modifier = Modifier,
     statName:String = "Inteligencia",
-    statValue:String = "000"
+    statValue:String = "000",
+    color:Color = Color.Black
 ) {
     Text(
         modifier = modifier,
         text = "$statName: $statValue",
         fontFamily = shaka_pow,
-        color = Color.White
+        color = color
     )
 }
