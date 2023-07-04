@@ -10,6 +10,7 @@ import ar.edu.unlam.mobile2.ui.utilities.HeroListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,12 +19,14 @@ class CollectionViewModelImp @Inject constructor(private val repo: IHeroReposito
         private set
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             heroList = heroList.copy(
                 isLoading = true
             )
             heroList = heroList.copy(
-                heroList = repo.getAllHero(),
+                heroList = withContext(Dispatchers.IO) {
+                    repo.getAllHero()
+                },
                 isLoading = false
             )
         }

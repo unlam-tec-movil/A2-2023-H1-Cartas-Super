@@ -13,6 +13,7 @@ import ar.edu.unlam.mobile2.domain.quiz.QuizOption
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -62,11 +63,16 @@ class QuizViewModel @Inject constructor(repo:IHeroRepository) : ViewModel() {
     var isCorrectAnswer by mutableStateOf(false)
         private set
 
+    private val HERO_LIST_SIZE = 4
+
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             _isLoadingLD.value = true
             isLoading = true
-            game = QuizGame(repo.getRandomPlayerDeck(4))
+            val heroList = withContext(Dispatchers.IO) {
+                repo.getRandomPlayerDeck(HERO_LIST_SIZE)
+            }
+            game = QuizGame(heroList)
             usingComposeState()
             usingLiveData()
             _isLoadingLD.value = false
