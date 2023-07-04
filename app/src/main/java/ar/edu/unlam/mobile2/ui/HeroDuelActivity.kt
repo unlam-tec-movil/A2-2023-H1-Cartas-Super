@@ -362,7 +362,7 @@ fun ActionMenu(
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        SelectStat(modifier = Modifier.width(155.dp),onClick = onClickSelectedStat)
+        SelectStat(modifier = Modifier.width(160.dp),onClick = onClickSelectedStat)
         Spacer(modifier = Modifier.size(8.dp))
         SelectMultiplier(
             useMultiplierX2 = useMultiplierX2,
@@ -380,7 +380,7 @@ fun ActionMenu(
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 style = TextStyle(
-                    fontSize = 16.sp
+                    fontSize = 15.sp
                 )
             )
         }
