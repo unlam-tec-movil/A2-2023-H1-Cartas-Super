@@ -126,7 +126,10 @@ fun HeroDetails(
             )
         }
         if (isStatsVisible) {
-            HeroStats(stats = dataHero.powerstats)
+            HeroStats(
+                Modifier.fillMaxWidth(),
+                stats = dataHero.powerstats
+            )
         }
 
         Button(
@@ -145,7 +148,7 @@ fun HeroDetails(
             )
         }
         if (isBiographyVisible) {
-            HeroBiography(biography = dataHero.biography)
+            HeroBiography(modifier = Modifier.fillMaxWidth(),biography = dataHero.biography)
         }
 
         Button(
@@ -164,7 +167,7 @@ fun HeroDetails(
             )
         }
         if (isAppearanceVisible) {
-            HeroAppearance(heroAppearance = dataHero.appearance)
+            HeroAppearance(modifier = Modifier.fillMaxWidth(),heroAppearance = dataHero.appearance)
         }
 
         Button(
@@ -183,7 +186,7 @@ fun HeroDetails(
             )
         }
         if (isWorkVisible) {
-            HeroWork(heroWork = dataHero.work)
+            HeroWork(modifier = Modifier.fillMaxWidth(),heroWork = dataHero.work)
         }
 
         Button(
@@ -202,7 +205,7 @@ fun HeroDetails(
             )
         }
         if (isConnectionsVisible) {
-            HeroConnections(heroConnections = dataHero.connections)
+            HeroConnections(modifier = Modifier.fillMaxWidth(),heroConnections = dataHero.connections)
         }
     }
 }
