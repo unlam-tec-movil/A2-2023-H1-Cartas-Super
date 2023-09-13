@@ -82,7 +82,7 @@ dependencies {
     testImplementation 'androidx.arch.core:core-testing:2.2.0'
 
     // Mockk
-    def mockkVersion = "1.13.5"
+    def mockkVersion = "1.13.7"
     testImplementation "io.mockk:mockk-android:${mockkVersion}"
     testImplementation "io.mockk:mockk-agent:${mockkVersion}"
     androidTestImplementation "io.mockk:mockk-android:${mockkVersion}"
