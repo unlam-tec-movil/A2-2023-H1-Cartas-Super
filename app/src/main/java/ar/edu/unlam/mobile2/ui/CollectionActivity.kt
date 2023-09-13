@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.DataHero
-import ar.edu.unlam.mobile2.domain.hero.HeroImage
+import ar.edu.unlam.mobile2.ui.components.hero.HeroImage
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.utilities.HeroListState
 import ar.edu.unlam.mobile2.ui.viewmodel.CollectionViewModelImp

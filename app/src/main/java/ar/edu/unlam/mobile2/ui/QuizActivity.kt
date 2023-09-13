@@ -42,8 +42,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
+import ar.edu.unlam.mobile2.MainActivity
 import ar.edu.unlam.mobile2.R
-import ar.edu.unlam.mobile2.domain.hero.HeroImage
+import ar.edu.unlam.mobile2.ui.components.hero.HeroImage
 import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.viewmodel.QuizViewModel

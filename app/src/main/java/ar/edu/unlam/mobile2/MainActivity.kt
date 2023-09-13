@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui
+package ar.edu.unlam.mobile2
 
 import android.content.Intent
 import android.os.Bundle
@@ -25,7 +25,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ar.edu.unlam.mobile2.R
+import ar.edu.unlam.mobile2.ui.CollectionActivity
+import ar.edu.unlam.mobile2.ui.HeroDuelActivity
+import ar.edu.unlam.mobile2.ui.QuizActivity
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
 import ar.edu.unlam.mobile2.ui.viewmodel.MainViewModel

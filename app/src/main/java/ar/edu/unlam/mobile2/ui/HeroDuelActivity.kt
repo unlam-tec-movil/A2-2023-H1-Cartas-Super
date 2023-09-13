@@ -55,11 +55,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ar.edu.unlam.mobile2.MainActivity
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.DataHero
-import ar.edu.unlam.mobile2.domain.hero.HeroCard
-import ar.edu.unlam.mobile2.domain.hero.HeroItem
-import ar.edu.unlam.mobile2.domain.hero.HeroPlayerCard
+import ar.edu.unlam.mobile2.ui.components.hero.HeroCard
+import ar.edu.unlam.mobile2.ui.components.hero.HeroItem
+import ar.edu.unlam.mobile2.ui.components.hero.HeroPlayerCard
 import ar.edu.unlam.mobile2.domain.heroDuel.Stat
 import ar.edu.unlam.mobile2.domain.heroDuel.Winner
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
