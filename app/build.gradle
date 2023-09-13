@@ -40,7 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
-        viewBinding true
+        //viewBinding true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
@@ -102,6 +102,7 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
     ksp 'com.google.dagger:hilt-compiler:2.48' //2.45
 
     // Importante: Definir ambos lifecycle para que no exista conflicto entre versiones
