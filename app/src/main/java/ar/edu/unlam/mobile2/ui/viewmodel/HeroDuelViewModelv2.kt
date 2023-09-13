@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -69,12 +68,6 @@ class HeroDuelViewModelv2 @Inject constructor(private val repo:GameRepository): 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             game = repo.getNewCardGame()
-
-            /*
-            game = withContext(Dispatchers.IO) {
-                repo.getNewCardGame()
-            }
-             */
             initStateFlows()
             _isLoading.value = false
         }
