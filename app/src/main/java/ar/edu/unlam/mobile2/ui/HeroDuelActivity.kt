@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import ar.edu.unlam.mobile2.ui.screens.heroduel.HeroDuelUi
-import ar.edu.unlam.mobile2.ui.theme.Mobile2_ScaffoldingTheme
+import ar.edu.unlam.mobile2.ui.screens.heroduel.HeroDuelScreen
+import ar.edu.unlam.mobile2.ui.theme.ComicWarTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +18,7 @@ class HeroDuelActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Mobile2_ScaffoldingTheme(
+            ComicWarTheme(
                 darkTheme = isSystemInDarkTheme() /* es un boolean*/,
                 dynamicColor = true /*cambiar de ser necesario*/
             ) {
@@ -26,7 +26,7 @@ class HeroDuelActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HeroDuelUi(
+                    HeroDuelScreen(
                         modifier = Modifier.fillMaxSize()
                     )
                 }

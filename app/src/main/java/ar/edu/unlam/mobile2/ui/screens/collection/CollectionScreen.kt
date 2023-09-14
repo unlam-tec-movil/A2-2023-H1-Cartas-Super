@@ -36,7 +36,7 @@ import ar.edu.unlam.mobile2.ui.components.hero.HeroImage
 
 @Preview
 @Composable
-fun PantallaCollection(modifier: Modifier = Modifier, viewModel: CollectionViewModelImp = hiltViewModel()) {
+fun CollectionScreen(modifier: Modifier = Modifier, viewModel: CollectionViewModelImp = hiltViewModel()) {
     Box(modifier = modifier){
         Image(
             painter = painterResource(id = R.drawable.fondo_coleccion),

@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import ar.edu.unlam.mobile2.ui.screens.herodetail.HeroDetails
-import ar.edu.unlam.mobile2.ui.theme.Mobile2_ScaffoldingTheme
+import ar.edu.unlam.mobile2.ui.screens.herodetail.HeroDetailScreen
+import ar.edu.unlam.mobile2.ui.theme.ComicWarTheme
 import ar.edu.unlam.mobile2.ui.screens.herodetail.HeroDetailViewModelImp
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,13 +23,13 @@ class HeroDetailActivity : ComponentActivity() {
         val idString: String? = myIntent.getStringExtra("id")
         viewModel.getHero(idString!!.toInt())
         setContent {
-            Mobile2_ScaffoldingTheme {
+            ComicWarTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HeroDetails(modifier = Modifier.fillMaxSize())
+                    HeroDetailScreen(modifier = Modifier.fillMaxSize())
                 }
             }
         }

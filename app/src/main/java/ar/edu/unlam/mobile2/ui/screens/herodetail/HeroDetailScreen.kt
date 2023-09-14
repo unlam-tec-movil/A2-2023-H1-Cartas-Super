@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.ui.components.hero.HeroAppearance
 import ar.edu.unlam.mobile2.ui.components.hero.HeroBiography
@@ -43,8 +44,9 @@ import ar.edu.unlam.mobile2.ui.theme.shaka_pow
 
 @Preview
 @Composable
-fun HeroDetails(
+fun HeroDetailScreen(
     modifier: Modifier = Modifier,
+    controller: NavHostController,
     viewModel: HeroDetailViewModelImp = hiltViewModel(),
     heroID: Int = 1
 ) {

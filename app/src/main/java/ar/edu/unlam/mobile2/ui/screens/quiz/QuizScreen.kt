@@ -67,7 +67,7 @@ fun PopupResult(isCorrectAnswer:Boolean = false, show:Boolean = false) {
 }
 
 @Composable
-fun QuizUILiveData(modifier: Modifier = Modifier, viewModel: QuizViewModel = hiltViewModel()) {
+fun QuizScreen(modifier: Modifier = Modifier, viewModel: QuizViewModel = hiltViewModel()) {
     val offset = Offset(6.0f, 4.0f)
     val isLoading by viewModel.isLoadingLD.observeAsState(initial = true)
     val imageUrl by viewModel.heroPortraitUrlD.observeAsState()

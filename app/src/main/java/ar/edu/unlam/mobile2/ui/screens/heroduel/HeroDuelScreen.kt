@@ -97,7 +97,7 @@ fun WinnerScreen(modifier: Modifier = Modifier, winner: Winner = Winner.NONE, pl
 
 
 @Composable
-fun HeroDuelUi(
+fun HeroDuelScreen(
     modifier: Modifier = Modifier,
     viewModel: HeroDuelViewModelv2 = hiltViewModel()
 ) {
