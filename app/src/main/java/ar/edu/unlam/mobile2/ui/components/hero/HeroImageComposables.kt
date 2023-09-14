@@ -29,6 +29,7 @@ fun HeroSimpleImage(
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,
     url:String = "https://loremflickr.com/400/400/cat?lock=1",
+    contentScale: ContentScale = ContentScale.Fit,
     context: Context = LocalContext.current
 ) {
     val imageRequest = asyncImageRequestBuilder(context, url)
@@ -36,7 +37,7 @@ fun HeroSimpleImage(
     AsyncImage(
         model = imageRequest,
         contentDescription = "Hero's portrait",
-        contentScale = ContentScale.Crop,
+        contentScale = contentScale,
         alignment = alignment,
         modifier = modifier
     )
@@ -59,6 +60,7 @@ private fun asyncImageRequestBuilder(
 fun HeroImage(
     modifier: Modifier = Modifier,
     url: String = "https://loremflickr.com/400/400/cat?lock=1",
+    contentScale: ContentScale = ContentScale.Fit,
     context: Context = LocalContext.current
 ) {
     val imageRequest = subcomposeImageRequestBuilder(context,url)
@@ -76,7 +78,7 @@ fun HeroImage(
                 contentDescription = "broken image"
             )
         },
-        contentScale = ContentScale.Crop
+        contentScale = contentScale
     )
 }
 

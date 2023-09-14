@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.domain.hero.Powerstats
-import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
+import ar.edu.unlam.mobile2.ui.theme.shaka_pow
 
 
 @Preview(showBackground = true)

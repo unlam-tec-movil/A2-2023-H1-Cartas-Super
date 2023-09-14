@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui.screens
+package ar.edu.unlam.mobile2.ui.screens.heroduel
 
 import android.content.Intent
 import androidx.compose.foundation.Image
@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import ar.edu.unlam.mobile2.MainActivity
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.DataHero
@@ -57,8 +58,7 @@ import ar.edu.unlam.mobile2.domain.heroDuel.Winner
 import ar.edu.unlam.mobile2.ui.components.hero.HeroCard
 import ar.edu.unlam.mobile2.ui.components.hero.HeroItem
 import ar.edu.unlam.mobile2.ui.components.hero.HeroPlayerCard
-import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
-import ar.edu.unlam.mobile2.ui.viewmodel.HeroDuelViewModelv2
+import ar.edu.unlam.mobile2.ui.theme.shaka_pow
 
 
 @Preview(showBackground = true)
@@ -98,8 +98,9 @@ fun WinnerScreen(modifier: Modifier = Modifier, winner: Winner = Winner.NONE, pl
 
 
 @Composable
-fun HeroDuelUi(
+fun HeroDuelScreen(
     modifier: Modifier = Modifier,
+    controller: NavHostController,
     viewModel: HeroDuelViewModelv2 = hiltViewModel()
 ) {
     Image(
