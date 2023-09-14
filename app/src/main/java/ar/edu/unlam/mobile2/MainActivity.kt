@@ -68,7 +68,16 @@ fun MainScreen() {
     ) { paddingValue ->
         NavHost(navController = controller, startDestination = "home") {
             composable("home") {
-                HomeScreen(modifier = Modifier.padding(paddingValue))
+                HomeScreen(
+                    modifier = Modifier.padding(paddingValue),
+                    controller = controller
+                )
+            }
+            composable("collection") {
+                CollectionScreen(
+                    modifier = Modifier.padding(paddingValue),
+                    controller = controller
+                )
             }
             composable(
                 route = "herodetail/{heroid}",
@@ -77,17 +86,21 @@ fun MainScreen() {
                 val heroID = navBackStackEntry.arguments?.getInt("heroid") ?: 1
                 HeroDetailScreen(
                     modifier = Modifier.padding(paddingValue),
-                    controller = controller, heroID = heroID
+                    controller = controller,
+                    heroID = heroID
                 )
             }
             composable("quiz") {
-                QuizScreen(modifier = Modifier.padding(paddingValue))
-            }
-            composable("collection") {
-                CollectionScreen(modifier = Modifier.padding(paddingValue))
+                QuizScreen(
+                    modifier = Modifier.padding(paddingValue),
+                    controller = controller
+                )
             }
             composable("duel") {
-                HeroDuelScreen(modifier = Modifier.padding(paddingValue))
+                HeroDuelScreen(
+                    modifier = Modifier.padding(paddingValue),
+                    controller = controller
+                )
             }
         }
     }

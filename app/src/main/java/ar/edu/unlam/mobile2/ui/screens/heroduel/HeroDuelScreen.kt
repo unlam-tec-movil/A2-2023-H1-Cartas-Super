@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import ar.edu.unlam.mobile2.MainActivity
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.DataHero
@@ -99,6 +100,7 @@ fun WinnerScreen(modifier: Modifier = Modifier, winner: Winner = Winner.NONE, pl
 @Composable
 fun HeroDuelScreen(
     modifier: Modifier = Modifier,
+    controller: NavHostController,
     viewModel: HeroDuelViewModelv2 = hiltViewModel()
 ) {
     Image(

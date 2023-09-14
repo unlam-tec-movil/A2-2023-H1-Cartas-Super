@@ -24,7 +24,7 @@ class QuizActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     //QuizUI(viewModel = viewModel, modifier = Modifier.fillMaxSize())
-                    QuizScreen(modifier = Modifier.fillMaxSize())
+                    QuizScreen(modifier = Modifier.fillMaxSize(), controller = controller)
                 }
             }
         }

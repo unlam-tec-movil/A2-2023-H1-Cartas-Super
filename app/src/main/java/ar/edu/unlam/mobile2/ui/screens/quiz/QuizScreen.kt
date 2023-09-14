@@ -41,6 +41,7 @@ import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.ui.components.hero.HeroImage
 import ar.edu.unlam.mobile2.ui.theme.shaka_pow
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 
 
 @Composable
@@ -67,7 +68,11 @@ fun PopupResult(isCorrectAnswer:Boolean = false, show:Boolean = false) {
 }
 
 @Composable
-fun QuizScreen(modifier: Modifier = Modifier, viewModel: QuizViewModel = hiltViewModel()) {
+fun QuizScreen(
+    modifier: Modifier = Modifier,
+    controller: NavHostController,
+    viewModel: QuizViewModel = hiltViewModel()
+) {
     val offset = Offset(6.0f, 4.0f)
     val isLoading by viewModel.isLoadingLD.observeAsState(initial = true)
     val imageUrl by viewModel.heroPortraitUrlD.observeAsState()

@@ -27,7 +27,8 @@ class HeroDuelActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     HeroDuelScreen(
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
+                        controller = controller
                     )
                 }
             }

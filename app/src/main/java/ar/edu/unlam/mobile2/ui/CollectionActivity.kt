@@ -23,7 +23,7 @@ class CollectionActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CollectionScreen(modifier = Modifier.fillMaxSize())
+                    CollectionScreen(modifier = Modifier.fillMaxSize(), controller = controller)
                 }
             }
         }
