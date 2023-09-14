@@ -11,6 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,10 +23,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.ui.components.hero.HeroAppearance
@@ -42,7 +43,7 @@ import ar.edu.unlam.mobile2.ui.theme.shaka_pow
  */////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-@Preview
+
 @Composable
 fun HeroDetailScreen(
     modifier: Modifier = Modifier,
@@ -57,6 +58,11 @@ fun HeroDetailScreen(
     var isWorkVisible by rememberSaveable { mutableStateOf(true) }
     var isConnectionsVisible by rememberSaveable { mutableStateOf(true) }
 
+    val isLoading by viewModel._isLoading.collectAsStateWithLifecycle()
+
+    while(isLoading) {
+        CircularProgressIndicator(modifier = Modifier.fillMaxSize())
+    }
     val dataHero = viewModel.hero
 
     Box(modifier = modifier) {
@@ -77,7 +83,6 @@ fun HeroDetailScreen(
                 .fillMaxWidth(),
                 url = dataHero.image.url
             )
-
             Row(
                 modifier = modifier.align(Alignment.CenterHorizontally)
             ) {

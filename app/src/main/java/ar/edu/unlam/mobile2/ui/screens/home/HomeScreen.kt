@@ -1,6 +1,5 @@
 package ar.edu.unlam.mobile2.ui.screens.home
 
-import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,18 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import ar.edu.unlam.mobile2.R
-import ar.edu.unlam.mobile2.ui.CollectionActivity
-import ar.edu.unlam.mobile2.ui.HeroDuelActivity
-import ar.edu.unlam.mobile2.ui.QuizActivity
 import ar.edu.unlam.mobile2.ui.theme.shaka_pow
-import ar.edu.unlam.mobile2.ui.viewmodel.MainViewModel
 
 @Composable
 fun NavigationButton(modifier : Modifier = Modifier,text: String = "button",onClick: () -> Unit) {
@@ -49,13 +42,11 @@ fun NavigationButton(modifier : Modifier = Modifier,text: String = "button",onCl
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    controller: NavHostController,
-    viewmodel: MainViewModel = hiltViewModel(),
+    controller: NavHostController
 ) {
 
     val navButtonModifier = Modifier.wrapContentSize().padding(16.dp)
 
-    val context = LocalContext.current
     Box(modifier = modifier) {
         Image(
             painter = painterResource(id = R.drawable.pantalla_principal),

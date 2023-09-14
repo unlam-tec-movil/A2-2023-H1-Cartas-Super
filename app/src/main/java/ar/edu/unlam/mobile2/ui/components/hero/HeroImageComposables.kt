@@ -36,7 +36,7 @@ fun HeroSimpleImage(
     AsyncImage(
         model = imageRequest,
         contentDescription = "Hero's portrait",
-        contentScale = ContentScale.Crop,
+        contentScale = ContentScale.Fit,
         alignment = alignment,
         modifier = modifier
     )
@@ -76,7 +76,7 @@ fun HeroImage(
                 contentDescription = "broken image"
             )
         },
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.Fit
     )
 }
 
