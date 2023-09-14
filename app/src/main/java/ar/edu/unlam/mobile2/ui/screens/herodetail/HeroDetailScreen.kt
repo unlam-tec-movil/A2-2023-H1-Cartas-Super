@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui.screens
+package ar.edu.unlam.mobile2.ui.screens.herodetail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -33,8 +33,7 @@ import ar.edu.unlam.mobile2.ui.components.hero.HeroConnections
 import ar.edu.unlam.mobile2.ui.components.hero.HeroImage
 import ar.edu.unlam.mobile2.ui.components.hero.HeroStats
 import ar.edu.unlam.mobile2.ui.components.hero.HeroWork
-import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
-import ar.edu.unlam.mobile2.ui.viewmodel.HeroDetailViewModelImp
+import ar.edu.unlam.mobile2.ui.theme.shaka_pow
 
 
 /* ////////////////////////////////////////////////////////////////////////////////////////////////

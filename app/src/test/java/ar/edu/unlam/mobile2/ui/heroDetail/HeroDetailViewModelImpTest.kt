@@ -6,7 +6,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import ar.edu.unlam.mobile2.data.repository.IHeroRepository
 import ar.edu.unlam.mobile2.domain.hero.DataHero
 import ar.edu.unlam.mobile2.MainDispatcherRule
-import ar.edu.unlam.mobile2.ui.viewmodel.HeroDetailViewModelImp
+import ar.edu.unlam.mobile2.ui.screens.herodetail.HeroDetailViewModelImp
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK

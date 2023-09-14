@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.sp
 import ar.edu.unlam.mobile2.ui.CollectionActivity
 import ar.edu.unlam.mobile2.ui.HeroDuelActivity
 import ar.edu.unlam.mobile2.ui.QuizActivity
-import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
-import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
+import ar.edu.unlam.mobile2.ui.theme.Mobile2_ScaffoldingTheme
+import ar.edu.unlam.mobile2.ui.theme.shaka_pow
 import ar.edu.unlam.mobile2.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope

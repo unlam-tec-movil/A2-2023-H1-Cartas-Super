@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui.screens
+package ar.edu.unlam.mobile2.ui.screens.collection
 
 import android.content.Intent
 import androidx.compose.foundation.Image
@@ -33,7 +33,6 @@ import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.DataHero
 import ar.edu.unlam.mobile2.ui.HeroDetailActivity
 import ar.edu.unlam.mobile2.ui.components.hero.HeroImage
-import ar.edu.unlam.mobile2.ui.viewmodel.CollectionViewModelImp
 
 @Preview
 @Composable

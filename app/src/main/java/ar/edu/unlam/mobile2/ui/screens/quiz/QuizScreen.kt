@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui.screens
+package ar.edu.unlam.mobile2.ui.screens.quiz
 
 import android.content.Intent
 import androidx.compose.foundation.Image
@@ -39,8 +39,7 @@ import androidx.compose.ui.window.DialogProperties
 import ar.edu.unlam.mobile2.MainActivity
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.ui.components.hero.HeroImage
-import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
-import ar.edu.unlam.mobile2.ui.viewmodel.QuizViewModel
+import ar.edu.unlam.mobile2.ui.theme.shaka_pow
 import androidx.hilt.navigation.compose.hiltViewModel
 
 

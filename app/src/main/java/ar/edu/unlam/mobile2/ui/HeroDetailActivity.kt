@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import ar.edu.unlam.mobile2.ui.screens.HeroDetails
-import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
-import ar.edu.unlam.mobile2.ui.viewmodel.HeroDetailViewModelImp
+import ar.edu.unlam.mobile2.ui.screens.herodetail.HeroDetails
+import ar.edu.unlam.mobile2.ui.theme.Mobile2_ScaffoldingTheme
+import ar.edu.unlam.mobile2.ui.screens.herodetail.HeroDetailViewModelImp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

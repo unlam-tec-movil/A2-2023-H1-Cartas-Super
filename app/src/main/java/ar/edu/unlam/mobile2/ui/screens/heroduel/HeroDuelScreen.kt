@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui.screens
+package ar.edu.unlam.mobile2.ui.screens.heroduel
 
 import android.content.Intent
 import androidx.compose.foundation.Image
@@ -57,8 +57,7 @@ import ar.edu.unlam.mobile2.domain.heroDuel.Winner
 import ar.edu.unlam.mobile2.ui.components.hero.HeroCard
 import ar.edu.unlam.mobile2.ui.components.hero.HeroItem
 import ar.edu.unlam.mobile2.ui.components.hero.HeroPlayerCard
-import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
-import ar.edu.unlam.mobile2.ui.viewmodel.HeroDuelViewModelv2
+import ar.edu.unlam.mobile2.ui.theme.shaka_pow
 
 
 @Preview(showBackground = true)

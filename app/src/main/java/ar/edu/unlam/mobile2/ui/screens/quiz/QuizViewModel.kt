@@ -1,4 +1,4 @@
-package ar.edu.unlam.mobile2.ui.viewmodel
+package ar.edu.unlam.mobile2.ui.screens.quiz
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

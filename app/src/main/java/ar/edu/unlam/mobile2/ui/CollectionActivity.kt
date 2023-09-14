@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import ar.edu.unlam.mobile2.ui.screens.PantallaCollection
-import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
+import ar.edu.unlam.mobile2.ui.screens.collection.PantallaCollection
+import ar.edu.unlam.mobile2.ui.theme.Mobile2_ScaffoldingTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
