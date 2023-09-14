@@ -1,8 +1,7 @@
-package ar.edu.unlam.mobile2.ui
+package ar.edu.unlam.mobile2
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -25,7 +24,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ar.edu.unlam.mobile2.R
+import ar.edu.unlam.mobile2.ui.CollectionActivity
+import ar.edu.unlam.mobile2.ui.HeroDuelActivity
+import ar.edu.unlam.mobile2.ui.QuizActivity
 import ar.edu.unlam.mobile2.ui.ui.theme.Mobile2_ScaffoldingTheme
 import ar.edu.unlam.mobile2.ui.ui.theme.shaka_pow
 import ar.edu.unlam.mobile2.ui.viewmodel.MainViewModel
@@ -52,12 +53,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-    override fun onStart() {
-        super.onStart()
-        Log.i("MainActivity", "onStart")
-    }
-
 }
 
 @Composable
@@ -136,102 +131,3 @@ fun ScreenPreview() {
     }
 }
 
-// @Composable
-// fun content(name: String) {
-// val context = LocalContext.current
-// Log.i("MainActivity", "start content")
-// Column() {
-// Log.i("MainActivity", "button row")
-// Row() {
-// Button(
-// onClick = {
-// Log.i("Button", "Presiono el boton")
-// mainViewModel.updateKittyUrl()
-// },
-// ) {
-// Text(text = "Actualizar imagen")
-// }
-// Button(
-// onClick = {
-// context.startActivity(Intent(context, CollectionActivity::class.java))
-// },
-// ) {
-// Text(text = "ir pantalla Collection")
-// }
-//
-// }
-//
-// Log.i("MainActivity", "first row")
-// Row() {
-// Text(text = "Imagen de los gatitos")
-// Button(
-// onClick = {
-// context.startActivity(Intent(context, HeroDetailActivity::class.java))
-// },
-// ) {
-// Text(text = "ir pantalla heroDetail")
-// }
-// }
-// Log.i("MainActivity", "second row")
-// Row() {
-// SubcomposeAsyncImage(
-// model = mainViewModel.getImageRequest(context),
-// // placeholder = painterResource(R.drawable.placeholder),
-// contentDescription = stringResource(R.string.cat_image),
-// contentScale = ContentScale.FillBounds,
-// loading = {
-// CircularProgressIndicator(
-// modifier = Modifier
-// .height(50.dp)
-// .width(50.dp),
-// )
-// },
-// modifier = Modifier
-// .height(300.dp)
-// .width(500.dp),
-// // error = rememberAsyncImagePainter(model = mainViewModel.DEFAULT),
-// onError = { error ->
-// run {
-// mainViewModel.updateKittyUrl()
-// Log.e("AsyncImageError", error.result.throwable.message.toString())
-// }
-// },
-// onLoading = { state ->
-// if (BuildConfig.DEBUG) {
-// Log.i(
-// "AsyncImageLoading",
-// state.toString(),
-// )
-// }
-// },
-//
-// )
-// }
-// Log.i("MainActivity", "third row")
-// Row() {
-// Text(text = "Pie de imagen")
-// }
-// }
-// }
-//
-// override fun onCreateOptionsMenu(menu: Menu): Boolean {
-// // Inflate the menu; this adds items to the action bar if it is present.
-// menuInflater.inflate(R.menu.menu_main, menu)
-// return true
-// }
-//
-// override fun onOptionsItemSelected(item: MenuItem): Boolean {
-// // Handle action bar item clicks here. The action bar will
-// // automatically handle clicks on the Home/Up button, so long
-// // as you specify a parent activity in AndroidManifest.xml.
-// return when (item.itemId) {
-// R.id.action_settings -> true
-// else -> super.onOptionsItemSelected(item)
-// }
-// }
-//
-// /*override fun onSupportNavigateUp(): Boolean {
-// val navController = findNavController(R.id.nav_host_fragment_content_main)
-// return navController.navigateUp(appBarConfiguration)
-// || super.onSupportNavigateUp()
-// }*/
