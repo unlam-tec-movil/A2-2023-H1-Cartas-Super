@@ -75,7 +75,7 @@ fun HomeScreen(
             }
             NavigationButton(
                 modifier = navButtonModifier,
-                text = "Colección"
+                text = "Coleccion"
             ) {
                 controller.navigate(route = "collection")
             }

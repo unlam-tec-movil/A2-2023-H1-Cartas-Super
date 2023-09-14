@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -83,7 +83,7 @@ fun GaleriaItem(
     dataHero: DataHero = DataHero(),
     onItemClick : (Int) -> Unit,
 ) {
-    Button(
+    TextButton(
         modifier = modifier,
         shape = RectangleShape,
         onClick = { onItemClick(dataHero.id.toInt()) }

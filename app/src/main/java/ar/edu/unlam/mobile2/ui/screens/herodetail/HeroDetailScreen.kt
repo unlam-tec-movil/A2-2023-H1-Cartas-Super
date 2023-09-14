@@ -60,132 +60,133 @@ fun HeroDetailScreen(
 
     val isLoading by viewModel._isLoading.collectAsStateWithLifecycle()
 
-    while(isLoading) {
+    if(isLoading) {
         CircularProgressIndicator(modifier = Modifier.fillMaxSize())
-    }
-    val dataHero = viewModel.hero
+    }else {
+        val dataHero = viewModel.hero
 
-    Box(modifier = modifier) {
-        Image(
-            painter = painterResource(id = R.drawable.fondo_coleccion),
-            contentDescription = "Pantalla detalles del héroe",
-            contentScale = ContentScale.FillHeight,
-            modifier = Modifier.fillMaxSize()
-        )
-        Column(
-            modifier = modifier
-                .verticalScroll(state = rememberScrollState())
-        ) {
-
-            HeroImage(modifier = Modifier
-                .padding(8.dp)
-                .align(Alignment.CenterHorizontally)
-                .fillMaxWidth(),
-                url = dataHero.image.url
+        Box(modifier = modifier) {
+            Image(
+                painter = painterResource(id = R.drawable.fondo_coleccion),
+                contentDescription = "Pantalla detalles del héroe",
+                contentScale = ContentScale.FillHeight,
+                modifier = Modifier.fillMaxSize()
             )
-            Row(
-                modifier = modifier.align(Alignment.CenterHorizontally)
-            ) {
-                Text(text = "${dataHero.id} ${dataHero.name}")
-            }
-            Button(
-                onClick = { isStatsVisible = !isStatsVisible },
+            Column(
                 modifier = modifier
-                    .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                colors = ButtonDefaults.buttonColors(Color.Red)
+                    .verticalScroll(state = rememberScrollState())
             ) {
-                Text(
-                    text = if (isStatsVisible) "Ocultar Stats" else "Mostrar Stats",
-                    fontSize = 20.sp,
-                    color = Color.White,
-                    fontFamily = shaka_pow
-                )
-            }
-            if (isStatsVisible) {
-                HeroStats(
-                    Modifier.fillMaxWidth(),
-                    stats = dataHero.powerstats
-                )
-            }
 
-            Button(
-                onClick = { isBiographyVisible = !isBiographyVisible },
-                modifier = modifier
+                HeroImage(modifier = Modifier
+                    .padding(8.dp)
                     .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                colors = ButtonDefaults.buttonColors(Color.Red)
-            ) {
-                Text(
-                    text = if (isBiographyVisible) "Ocultar biografia" else "Mostrar biografia",
-                    fontSize = 20.sp,
-                    color = Color.White,
-                    fontFamily = shaka_pow
+                    .fillMaxWidth(),
+                    url = dataHero.image.url
                 )
-            }
-            if (isBiographyVisible) {
-                HeroBiography(modifier = Modifier.fillMaxWidth(),biography = dataHero.biography)
-            }
+                Row(
+                    modifier = modifier.align(Alignment.CenterHorizontally)
+                ) {
+                    Text(text = "${dataHero.id} ${dataHero.name}")
+                }
+                Button(
+                    onClick = { isStatsVisible = !isStatsVisible },
+                    modifier = modifier
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    colors = ButtonDefaults.buttonColors(Color.Red)
+                ) {
+                    Text(
+                        text = if (isStatsVisible) "Ocultar Stats" else "Mostrar Stats",
+                        fontSize = 20.sp,
+                        color = Color.White,
+                        fontFamily = shaka_pow
+                    )
+                }
+                if (isStatsVisible) {
+                    HeroStats(
+                        Modifier.fillMaxWidth(),
+                        stats = dataHero.powerstats
+                    )
+                }
 
-            Button(
-                onClick = { isAppearanceVisible = !isAppearanceVisible },
-                modifier = modifier
-                    .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                colors = ButtonDefaults.buttonColors(Color.Red)
-            ) {
-                Text(
-                    text = if (isAppearanceVisible) "Ocultar apariencia" else "mostrar apariencia",
-                    fontSize = 20.sp,
-                    color = Color.White,
-                    fontFamily = shaka_pow
-                )
-            }
-            if (isAppearanceVisible) {
-                HeroAppearance(modifier = Modifier.fillMaxWidth(),heroAppearance = dataHero.appearance)
-            }
+                Button(
+                    onClick = { isBiographyVisible = !isBiographyVisible },
+                    modifier = modifier
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    colors = ButtonDefaults.buttonColors(Color.Red)
+                ) {
+                    Text(
+                        text = if (isBiographyVisible) "Ocultar biografia" else "Mostrar biografia",
+                        fontSize = 20.sp,
+                        color = Color.White,
+                        fontFamily = shaka_pow
+                    )
+                }
+                if (isBiographyVisible) {
+                    HeroBiography(modifier = Modifier.fillMaxWidth(),biography = dataHero.biography)
+                }
 
-            Button(
-                onClick = { isWorkVisible = !isWorkVisible },
-                modifier = modifier
-                    .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                colors = ButtonDefaults.buttonColors(Color.Red)
-            ) {
-                Text(
-                    text = if (isWorkVisible) "Ocultar profesion" else "Mostrar profesi0n",
-                    fontSize = 20.sp,
-                    color = Color.White,
-                    fontFamily = shaka_pow
-                )
-            }
-            if (isWorkVisible) {
-                HeroWork(modifier = Modifier.fillMaxWidth(),heroWork = dataHero.work)
-            }
+                Button(
+                    onClick = { isAppearanceVisible = !isAppearanceVisible },
+                    modifier = modifier
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    colors = ButtonDefaults.buttonColors(Color.Red)
+                ) {
+                    Text(
+                        text = if (isAppearanceVisible) "Ocultar apariencia" else "mostrar apariencia",
+                        fontSize = 20.sp,
+                        color = Color.White,
+                        fontFamily = shaka_pow
+                    )
+                }
+                if (isAppearanceVisible) {
+                    HeroAppearance(modifier = Modifier.fillMaxWidth(),heroAppearance = dataHero.appearance)
+                }
 
-            Button(
-                onClick = { isConnectionsVisible = !isConnectionsVisible },
-                modifier = modifier
-                    .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                colors = ButtonDefaults.buttonColors(Color.Red)
-            ) {
-                Text(
-                    text = if (isConnectionsVisible) "Ocultar connecciones" else "Mostrar conecciones",
-                    fontSize = 20.sp,
-                    color = Color.White,
-                    fontFamily = shaka_pow
-                )
-            }
-            if (isConnectionsVisible) {
-                HeroConnections(modifier = Modifier.fillMaxWidth(),heroConnections = dataHero.connections)
+                Button(
+                    onClick = { isWorkVisible = !isWorkVisible },
+                    modifier = modifier
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    colors = ButtonDefaults.buttonColors(Color.Red)
+                ) {
+                    Text(
+                        text = if (isWorkVisible) "Ocultar profesion" else "Mostrar profesi0n",
+                        fontSize = 20.sp,
+                        color = Color.White,
+                        fontFamily = shaka_pow
+                    )
+                }
+                if (isWorkVisible) {
+                    HeroWork(modifier = Modifier.fillMaxWidth(),heroWork = dataHero.work)
+                }
+                Button(
+                    onClick = { isConnectionsVisible = !isConnectionsVisible },
+                    modifier = modifier
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    colors = ButtonDefaults.buttonColors(Color.Red)
+                ) {
+                    Text(
+                        text = if (isConnectionsVisible) "Ocultar connecciones" else "Mostrar conecciones",
+                        fontSize = 20.sp,
+                        color = Color.White,
+                        fontFamily = shaka_pow
+                    )
+                }
+                if (isConnectionsVisible) {
+                    HeroConnections(modifier = Modifier.fillMaxWidth(),heroConnections = dataHero.connections)
+                }
             }
         }
     }
+
 
 }

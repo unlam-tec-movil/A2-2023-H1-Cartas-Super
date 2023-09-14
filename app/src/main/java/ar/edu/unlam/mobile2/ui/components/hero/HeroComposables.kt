@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ar.edu.unlam.mobile2.domain.hero.DataHero
@@ -71,8 +72,9 @@ fun HeroCard(
             HeroImage(
                 modifier = Modifier
                     .size(190.dp)
-                    .border(width = 1.dp, color = Color.Black, shape = RectangleShape),
-                url = hero.image.url
+                    .border(width = 1.dp, color = Color.Black),
+                url = hero.image.url,
+                contentScale = ContentScale.Crop
             )
             Text(
                 modifier = Modifier.padding(1.dp),
