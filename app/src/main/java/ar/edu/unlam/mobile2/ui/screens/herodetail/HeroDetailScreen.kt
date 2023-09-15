@@ -58,12 +58,12 @@ fun HeroDetailScreen(
     var isWorkVisible by rememberSaveable { mutableStateOf(true) }
     var isConnectionsVisible by rememberSaveable { mutableStateOf(true) }
 
-    val isLoading by viewModel._isLoading.collectAsStateWithLifecycle()
+    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
 
     if(isLoading) {
         CircularProgressIndicator(modifier = Modifier.fillMaxSize())
     }else {
-        val dataHero = viewModel.hero
+        val dataHero by viewModel.hero.collectAsStateWithLifecycle()
 
         Box(modifier = modifier) {
             Image(

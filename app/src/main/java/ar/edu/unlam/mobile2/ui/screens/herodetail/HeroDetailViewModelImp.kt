@@ -1,8 +1,5 @@
 package ar.edu.unlam.mobile2.ui.screens.herodetail
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.unlam.mobile2.data.repository.IHeroRepository
@@ -18,19 +15,22 @@ import javax.inject.Inject
 @HiltViewModel
 class HeroDetailViewModelImp @Inject constructor(private val repo: IHeroRepository): ViewModel() {
 
-    var hero by mutableStateOf(DataHero())
-        private set
+    //var hero by mutableStateOf(DataHero())
+    //    private set
 
-    private var isLoading = MutableStateFlow(true)
-    val _isLoading = isLoading.asStateFlow()
+    private val _hero = MutableStateFlow(DataHero())
+    val hero = _hero.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading = _isLoading.asStateFlow()
 
     fun getHero(id: Int) {
         viewModelScope.launch {
-            isLoading.value = true
-            hero = withContext(Dispatchers.IO) {
+            _isLoading.value = true
+            _hero.value = withContext(Dispatchers.IO) {
                 repo.getHero(id)
             }
-            isLoading.value = false
+            _isLoading.value = false
         }
     }
 }
