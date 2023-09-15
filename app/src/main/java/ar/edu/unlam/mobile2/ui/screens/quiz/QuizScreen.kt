@@ -21,7 +21,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -41,6 +40,7 @@ import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.ui.components.hero.HeroImage
 import ar.edu.unlam.mobile2.ui.theme.shaka_pow
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 
 
@@ -74,12 +74,12 @@ fun QuizScreen(
     viewModel: QuizViewModel = hiltViewModel()
 ) {
     val offset = Offset(6.0f, 4.0f)
-    val isLoading by viewModel.isLoadingLD.observeAsState(initial = true)
-    val imageUrl by viewModel.heroPortraitUrlD.observeAsState()
-    val option1Text by viewModel.option1LD.observeAsState(initial = "option1")
-    val option2Text by viewModel.option2LD.observeAsState(initial = "option2")
-    val option3Text by viewModel.option3LD.observeAsState(initial = "option3")
-    val option4Text by viewModel.option4LD.observeAsState(initial = "option4")
+    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
+    val imageUrl by viewModel.heroPortraitUrl.collectAsStateWithLifecycle()
+    val option1Text by viewModel.option1.collectAsStateWithLifecycle()
+    val option2Text by viewModel.option2.collectAsStateWithLifecycle()
+    val option3Text by viewModel.option3.collectAsStateWithLifecycle()
+    val option4Text by viewModel.option4.collectAsStateWithLifecycle()
     if(isLoading) {
         Box(modifier = modifier.fillMaxSize()) {
             CircularProgressIndicator(modifier = modifier.align(Alignment.Center))
@@ -116,7 +116,7 @@ fun QuizScreen(
                     modifier = Modifier
                         .aspectRatio(ratio = 1f)
                         .padding(8.dp),
-                    url = imageUrl!!
+                    url = imageUrl
                 )
                 AnswerPanel(
                     modifier = Modifier
@@ -134,50 +134,10 @@ fun QuizScreen(
             }
         }
     }
-    PopupResult(isCorrectAnswer = viewModel.isCorrectAnswer, show = viewModel.showResult)
-}
-
-@Composable
-fun QuizUI(modifier: Modifier = Modifier, viewModel: QuizViewModel){
-    if(viewModel.isLoading) {
-        Box(modifier = modifier.fillMaxSize()) {
-            CircularProgressIndicator(modifier = modifier.align(Alignment.Center))
-        }
-    }else{
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier,
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "¿Quien es este heroe?",
-                color = Color.White,
-                fontFamily = shaka_pow,
-                fontSize = 24.sp,
-                modifier = Modifier.padding(horizontal = 8.dp)
-            )
-            HeroImage(
-                modifier = Modifier
-                    .aspectRatio(ratio = 1f)
-                    .padding(8.dp),
-                url = viewModel.heroPortraitUrl
-            )
-            AnswerPanel(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxWidth(),
-                option1Text = viewModel.option1,
-                option2Text = viewModel.option2,
-                option3Text = viewModel.option3,
-                option4Text = viewModel.option4,
-                onOption1Click = viewModel::selectOption1,
-                onOption2Click = viewModel::selectOption2,
-                onOption3Click = viewModel::selectOption3,
-                onOption4Click = viewModel::selectOption4
-            )
-        }
-    }
-    PopupResult(isCorrectAnswer = viewModel.isCorrectAnswer, show = viewModel.showResult)
+    PopupResult(
+        isCorrectAnswer = viewModel.isCorrectAnswer.collectAsStateWithLifecycle().value,
+        show = viewModel.showResult.collectAsStateWithLifecycle().value
+    )
 }
 
 @Preview(showBackground = true, widthDp = 600)
