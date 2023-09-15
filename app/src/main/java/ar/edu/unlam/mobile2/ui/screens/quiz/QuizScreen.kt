@@ -75,11 +75,11 @@ fun QuizScreen(
 ) {
     val offset = Offset(6.0f, 4.0f)
     val isLoading by viewModel.isLoadingLD.observeAsState(initial = true)
-    val imageUrl by viewModel.heroPortraitUrlD.observeAsState()
-    val option1Text by viewModel.option1LD.observeAsState(initial = "option1")
-    val option2Text by viewModel.option2LD.observeAsState(initial = "option2")
-    val option3Text by viewModel.option3LD.observeAsState(initial = "option3")
-    val option4Text by viewModel.option4LD.observeAsState(initial = "option4")
+    val imageUrl by viewModel.heroPortraitUrl.observeAsState()
+    val option1Text by viewModel.option1.observeAsState(initial = "option1")
+    val option2Text by viewModel.option2.observeAsState(initial = "option2")
+    val option3Text by viewModel.option3.observeAsState(initial = "option3")
+    val option4Text by viewModel.option4.observeAsState(initial = "option4")
     if(isLoading) {
         Box(modifier = modifier.fillMaxSize()) {
             CircularProgressIndicator(modifier = modifier.align(Alignment.Center))
