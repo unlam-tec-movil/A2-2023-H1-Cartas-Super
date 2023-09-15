@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import ar.edu.unlam.mobile2.R
 import ar.edu.unlam.mobile2.domain.hero.DataHero
@@ -41,12 +42,14 @@ fun CollectionScreen(
             contentScale = ContentScale.FillHeight,
             modifier = Modifier.fillMaxSize()
         )
-        if(viewModel.heroList.isLoading) {
+        val isLoading = viewModel.isLoading.collectAsStateWithLifecycle()
+
+        if(isLoading.value) {
                 CircularProgressIndicator(modifier = modifier.align(Alignment.Center))
         } else {
             Galeria(
                 modifier = Modifier.fillMaxSize(),
-                heroList = viewModel.heroList.heroList,
+                heroList = viewModel.heroList.collectAsStateWithLifecycle().value,
                 controller = controller
             )
         }
