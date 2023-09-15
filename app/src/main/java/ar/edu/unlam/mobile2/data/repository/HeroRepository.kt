@@ -15,8 +15,8 @@ import javax.inject.Inject
 
 class HeroRepository @Inject constructor(private val api:HeroService, private val dataBase:HeroDao) : IHeroRepository {
 
-
-
+    private val API_COLLECTION_SIZE = 731
+    private val COLLECTION_MAX_SIZE = 50 // es menor o igual a API_COLLECTION_SIZE
 
     override suspend fun getAdversaryDeck(size:Int): List<DataHero> {
         return getRandomPlayerDeck(size)
@@ -28,7 +28,7 @@ class HeroRepository @Inject constructor(private val api:HeroService, private va
         val list = mutableListOf<DataHero>()
         return withContext(Dispatchers.IO) {
             for (i in 1..size) {
-                val randomId = (1..731).random()
+                val randomId = (1..COLLECTION_MAX_SIZE).random()
                 val hero = getHero(randomId)
                 list.add(hero)
             }
@@ -84,7 +84,7 @@ class HeroRepository @Inject constructor(private val api:HeroService, private va
     override suspend fun getAllHero(): List<DataHero> {
         val list = mutableListOf<DataHero>()
         return withContext(Dispatchers.IO) {
-            for (i in 1..731) {
+            for (i in 1..COLLECTION_MAX_SIZE) {
                 val hero = getHero(i)
                 list.add(hero)
             }
